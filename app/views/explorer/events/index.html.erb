@@ -1,5 +1,5 @@
 <% provide(:title , 'Find Events' ) %>
-<% if @event.empty? do %>
+<% if !@event.empty? do %>
   <% content_for :map do %>
   <div style='width: 100%;' class="map-holder">
     <div id="map" style='width: 100%; height: 400px;'></div>
