@@ -21,7 +21,7 @@ module Explorer
 			slug.blank? || name_changed?
 		end
 
-		geocoded_by :zip
+		geocoded_by :full_street_address
 		after_validation :geocode
 		
 
