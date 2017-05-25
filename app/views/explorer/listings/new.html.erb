@@ -5,19 +5,34 @@
 	<%= simple_form_for @listing do |f| %>
 		<%= render 'shared/error_messages', :object => @listing %>
 		<% if !current_user.has_role? :admin && !@organizers.blank? %>
-			<%= f.label :organizer %>
-  		<%= f.collection_select :organizer_id, @organizers, :id, :name, {}, {:class => 'form-control'} %>
+  		<%= f.input :organizer_id, 
+        :label=> 'Organizer',
+        collection:  @organizers,
+        selected:  @listing.organizer, 
+        include_blank: '- None -' ,
+        input_html: { class: 'chosen-select form-control' }  
+        %>
 		<% end %>
 		<p>
 			<%= f.input :name, :label=>'Name of Organization/Community/Initiative' %>
 		</p>
 		<p>
-		  <%= f.label :category %>
-		  <%= f.collection_select :category_id, Explorer::Category.all, :id, :name, {:selected => 1}, { class: 'form-control' }%>
+		  <%= f.input :category_id, 
+        :label=> 'Category',
+        collection:  @organizer_categories,
+        selected:  @listing.category, 
+        include_blank: '- None -' ,
+        input_html: { class: 'chosen-select form-control' }  
+        %>
 		</p>
 		<%= f.input :url, :label=>'Website URL'  %>
 		<%= f.input :city %>
-		<%= f.input :state %>
+			<%= f.input :state, 
+			:label=> 'State',
+			collection: state_options,
+			include_blank: '- None -' ,
+			input_html: { class: 'chosen-select form-control' }  
+			%>
 		<%= f.input :zip %>
 		<hr/>
 		<%= f.submit 'Add Listing', :class=> 'btn btn-primary btn-block' %>

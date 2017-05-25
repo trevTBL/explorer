@@ -50,8 +50,12 @@
 
 
     <div class="form-group col-md-4">
-      <%= ff.label :state  %>
-      <%= ff.text_field :state, :class=> 'form-control' %>
+      <%= ff.input :state, 
+      :label=> 'State',
+      collection: state_options,
+      include_blank: '- None -' ,
+      input_html: { class: 'chosen-select form-control' }  
+      %>
     </div>
 
 

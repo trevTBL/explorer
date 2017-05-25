@@ -7,7 +7,7 @@ Explorer::Engine.routes.draw do
   resources :organizers
   resources :memberships
   resources :users
-  resources :categories, only: [:show]
+  resources :categories
   
   
   match 'day' => 'events#day', :via => 'get'

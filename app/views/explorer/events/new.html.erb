@@ -7,7 +7,7 @@
 		</div>
 	<%= render 'shared/error_messages', :object => @event %>
 
-	<%= form_for @event, :html => {:multipart => true} do |f| %>
+	<%= simple_form_for @event, :html => {:multipart => true} do |f| %>
 		<%= render :partial=> 'form', :locals=>{f: f} %>
 			<div class="form-group col-md-12">
 				<%= f.submit 'Post your event', :class=>'btn btn-primary btn-lg btn-block' %>

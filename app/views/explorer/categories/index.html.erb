@@ -1,0 +1,25 @@
+<% provide(:page_title, 'Category Home') %>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 col-xs-12">
+		<% breadcrumb :categories, @categories %>
+
+		<h1>Categories</h1>
+		<hr/>
+		<div class="row">
+		  <% @categories.each do |category| %>
+		  <div class="col-md-4 col-sm-12">
+		      <%= link_to category_path(category)do %>
+			      <div class="card text-center" style="color:<%= category.color %>;border-color:<%= category.color %>;">
+			      	<div class="card-block">
+			      		<i class="fa <%= category.icon %> fa-3x"></i>
+						    <h4 class="card-title"><%= category.name %></h4>
+						  </div>
+						</div>
+		      <% end %>
+		      </div>
+		  <% end %>
+		</div>
+		
+	</div>
+</div>

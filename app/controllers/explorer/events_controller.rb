@@ -23,6 +23,7 @@ module Explorer
 					<p>#{event.venue.city }, #{event.venue.state }, #{event.venue.zip }</p>
 					<p><u>#{location_link}</u></p>
 				" 
+				get_parent
 			end
 		end
 
@@ -122,6 +123,11 @@ module Explorer
 		end
 
 		private
+
+		def get_parent
+        parent = Category.where(name: "Event").last
+        @event_categories = Category.where(parent_id: parent.id)
+    end
 
 		def authorize_visitor
 			if !user_signed_in?

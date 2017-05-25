@@ -6,7 +6,7 @@
 	</div>
 
 	<%= render 'shared/error_messages', :object => @venue %>
-	<%= form_for(@venue) do |ff| %>
+	<%= simple_form_for(@venue) do |ff| %>
 		<%= render :partial=> 'form', :locals=>{ff:ff} %>
 		<%= ff.submit 'Add Venue', :class=>'btn btn-success btn-lg btn-block'  %>
 	<% end %>

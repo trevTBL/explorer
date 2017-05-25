@@ -2,29 +2,27 @@
 
 <h3>Event Details</h3>
 </div>
-<% if user_signed_in? %>
-  <% if current_user.has_role? :admin %>
-    <div class="form-group col-md-12">
-      <%= f.label :activated %><br/>
-      <%= f.check_box :activated %>
-    </div>
-    <div class="form-group col-md-12">
-      <%= f.label :featured %><br/>
-      <%= f.check_box :featured %>
-    </div>
-  <% end %>
-<% end %>
 
 <div class="form-group col-md-12">
-  <%= f.label :organizer %><br/>
-  <%= f.collection_select :organizer_id, current_user.organizers, :id, :name, {}, {:class => 'form-control'} %> <br/>
+  <%= f.input :organizer_id, 
+    :label=> 'Organizer',
+    collection: current_user.organizers,
+    selected:  @event.category, 
+    include_blank: '- None -' ,
+    input_html: { class: 'chosen-select form-control' }  
+    %><br/>
   
   <small><%= link_to 'Add new organizer', new_organizer_path %> </small>
 </div>
 
 <div class="form-group col-md-12">
-  <%= f.label :category %>
-  <%= f.collection_select :category_id, Explorer::Category.all, :id, :name, {:selected => 1}, { class: 'form-control' }%>
+  <%= f.input :category_id, 
+    :label=> 'Category',
+    collection: Explorer::Category.all,
+    selected:  @event.category, 
+    include_blank: '- None -' ,
+    input_html: { class: 'chosen-select form-control' }  
+    %>
 </div>
 
 <div class="form-group col-md-12">
@@ -117,9 +115,13 @@
 </a></p>
 <div class="collapse" id="selectVenue">
   <div class="form-group col-md-12">
-    <%= f.label :venue, "Select venue " %> 
-    <%= f.collection_select :venue_id, Explorer::Venue.all, :id, :name, {
-        include_blank: "Please select..." }, { class: 'form-control' } %>
+    <%= f.input :venue_id, 
+    :label=> 'Organizer',
+    collection: Explorer::Venue.all,
+    selected:  @event.venue, 
+    include_blank: '- None -' ,
+    input_html: { class: 'chosen-select form-control' }  
+    %><br/>
   </div>
 </div>
 
@@ -133,4 +135,17 @@
 </div>
 <div class="form-group col-md-12">
   <hr/>
+  <% if user_signed_in? %>
+    <% if current_user.has_role? :admin %>
+      <div class="form-group col-md-12">
+        <%= f.label :activated %><br/>
+        <%= f.check_box :activated %>
+      </div>
+      <div class="form-group col-md-12">
+        <%= f.label :featured %><br/>
+        <%= f.check_box :featured %>
+      </div>
+    <% end %>
+  <% end %>
+
 </div>

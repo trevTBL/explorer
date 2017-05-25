@@ -1,0 +1,31 @@
+<%= simple_form_for(@category) do |f| %>
+  <ul>
+    <% @category.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+  <div class="form-group">
+    <%= f.input :parent_id, 
+        :label=> 'Parent Category',
+        collection: Explorer::Category.all,
+        selected:  @category.parent_id, 
+        include_blank: '- None -' ,
+        input_html: { class: 'chosen-select form-control' }  
+        %>
+  </div>
+  <div class="form-group">
+    <%= f.input :name, :class=> 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :seodescription, :class=> 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :icon, :class=> 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.input :color, :class=> 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit :class=>'btn btn-default btn-large btn-block' %>
+  </div>
+<% end %>
