@@ -1,6 +1,6 @@
 module Explorer
 	class Event < ActiveRecord::Base
-		resourcify
+		# resourcify
 		include IceCube
 		serialize :schedule, IceCube::Schedule
 		# mount_uploader :image, EventUploader
