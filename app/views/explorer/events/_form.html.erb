@@ -18,7 +18,7 @@
 <div class="form-group col-md-12">
   <%= f.input :category_id, 
     :label=> 'Category',
-    collection: Explorer::Category.all,
+    collection:  @event_categories,
     selected:  @event.category, 
     include_blank: '- None -' ,
     input_html: { class: 'chosen-select form-control' }  

@@ -31,6 +31,7 @@ module Explorer
 			@user = current_user
 			@event = Event.new
 			venue = @event.build_venue()
+			get_parent
 		end
 
 		def create
