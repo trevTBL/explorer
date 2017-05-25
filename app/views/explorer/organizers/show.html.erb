@@ -1,0 +1,51 @@
+<% provide(:title , @organizer.name ) %>
+
+<div class="col-md-4">
+	<%= image_tag @organizer.logo, :class=>"img-responsive"%>
+	<div class="clearfix"></div>
+	<h2>
+		<%= @organizer.name %>
+		<% if can? :update, @organizer %>
+			<small><%= link_to '(edit)', edit_organizer_path(@organizer) %></small>
+		<% end %>
+	</h2>
+	<hr/>
+	<p class="lead">
+		<%= simple_format(@organizer.description) %>
+	</p>
+	<p>
+		<% if @organizer.listing %>
+			<%= @organizer.listing.city %>, <%= @organizer.listing.state %>, <%= @organizer.listing.zip %>
+		<% end %>
+	</p>
+	<hr/>
+	<ul class="list-inline">
+		<li>
+			<%= link_to(@organizer.url, :target=>"_blank" ) do %>
+				<i class="fa fa-globe fa-lg fa-border"></i>
+			<% end %>
+		</li>
+		<li>
+			<%= link_to(@organizer.twitter, :target=>"_blank" ) do %>
+				<i class="fa fa-twitter fa-lg fa-border"></i>
+			<% end %>
+		</li>
+		<li>
+			<%= link_to(@organizer.facebook, :target=>"_blank" ) do %>
+				<i class="fa fa-facebook fa-lg fa-border"></i>
+			<% end %>
+		</li>
+	</ul>
+</div>
+<div class="col-md-6 col-md-offset-1">
+<h3>Events by Organizer</h3>
+	<% @events.each do |e| %>
+		<p class="lead"><%= link_to e.title, e %></p>
+	<% end %>
+</div>
+<!-- <h3>The Event Team</h3>
+<%# @organizer.memberships.each do |m| %>
+
+<p class="lead"><%# link_to m.user.name, m.user %><%# ' (owner)' if m.owner? %></p>
+
+<%# end %> -->

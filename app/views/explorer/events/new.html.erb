@@ -1,0 +1,19 @@
+<% provide(:title , 'Add Event' ) %>
+
+<div class="submission-form">	
+	<% if !current_user.organizers.empty? %>
+		<div class="container">
+			<h2>Add new event</h2>
+		</div>
+	<%= render 'shared/error_messages', :object => @event %>
+
+	<%= form_for @event, :html => {:multipart => true} do |f| %>
+		<%= render :partial=> 'form', :locals=>{f: f} %>
+			<div class="form-group col-md-12">
+				<%= f.submit 'Post your event', :class=>'btn btn-primary btn-lg btn-block' %>
+			</div>
+		<% end %>
+	<% else %>
+    	<%= link_to 'Add Organizer Profile', new_organizer_path, :class=>'btn btn-primary' %>
+  <% end %>
+</div>

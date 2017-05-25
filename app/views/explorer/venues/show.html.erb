@@ -1,0 +1,64 @@
+<% provide(:title , @venue.name ) %>
+
+<div class="col-md-3">
+	<h2><%= @venue.name %></h2>
+
+	<p><%= @venue.address1 %></p>
+
+	<p><%= @venue.address2 %><br/>
+	<p><%= @venue.city %>, <%= @venue.state %> <%= @venue.zip %></p>
+
+	<% if user_signed_in? %>
+	  <% if can? :update, Explorer::Venue %>
+		<hr/>
+			<small><%= link_to 'edit', edit_venue_path(@venue) %></small>
+		<hr/>
+		<% end %>
+	<% end %>
+	<hr/>
+	<h4>Nearby Venues</h4>
+	<ul>
+		<% @venue.nearby_venues.each do |e| %>
+			<li><%= link_to e.name, venue_path(e) %></li>
+		<% end %>
+	</ul>
+</div>
+
+<div class="col-md-3 col-md-push-6">
+	<div id="map" style='width: 100%; height: 250px;'></div>
+	 <script type="text/javascript">
+      handler = Gmaps.build('Google');
+      handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+         markers = handler.addMarkers(<%=raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+         handler.getMap().setZoom(18)
+      });
+    </script>
+	<hr/>
+	<h4>Nearby Events</h4>
+	<ul>
+		<% @venue.nearby_events.each do |e| %>
+			<li><strong><%= link_to e.title, event_path(e) %></strong>, <%= e.first_day %> </li>
+		<% end %>
+	</ul>
+</div>
+
+<div class="col-md-6 col-md-pull-3">
+	<h3>Upcoming Events</h3>
+	<div>
+		<% @events.each do |e| %>
+			<div class="col-md-12">
+				<h3><%= link_to e.title, event_path(e) %></h3>
+				<p class="lead"><%= e.organizer.name %></p>
+				<p><strong><%= e.first_day %></strong> 
+					<br/><%= e.begins_at %> - <%= e.ends_at %>
+					<br/><%= e.venue.city %>, <%= e.venue.state %>
+				</p>
+				<p><%= simple_format(e.excerpt) %></p>
+				<hr/>
+			</div>
+		<% end %>
+	</div>
+</div>
+

@@ -1,0 +1,10 @@
+<% provide(:title , 'Add organizer' ) %>
+
+<div class="submission-form">
+	<h2 class="page-header">Create an organizer profile</h2>
+
+	<%= render 'shared/error_messages', :object => @organizer %>
+	<%= form_for @organizer, :html => {:multipart => true} do |f| %>
+		<%= render :partial=> 'form', :locals=>{f: f} %>
+	<% end %>
+</div>

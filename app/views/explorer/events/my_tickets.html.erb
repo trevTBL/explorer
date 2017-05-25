@@ -1,0 +1,21 @@
+<% provide(:title , 'My Tickets' ) %>
+
+<div class="container">
+	<div class="pull-right">
+		<%= render :partial=> 'shared/social_share' %>
+	</div>
+</div>
+
+<h2>My Events</h2>
+
+<ul class="list-group">
+	<% if !@events.empty? %>
+		<% @events.each do |e| %>
+			<li class="list-group-item">
+				<%= link_to e.title, e %>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
+
+

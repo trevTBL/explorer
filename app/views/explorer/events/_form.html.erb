@@ -1,0 +1,136 @@
+<div class="page-header col-md-12">
+
+<h3>Event Details</h3>
+</div>
+<% if user_signed_in? %>
+  <% if current_user.has_role? :admin %>
+    <div class="form-group col-md-12">
+      <%= f.label :activated %><br/>
+      <%= f.check_box :activated %>
+    </div>
+    <div class="form-group col-md-12">
+      <%= f.label :featured %><br/>
+      <%= f.check_box :featured %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="form-group col-md-12">
+  <%= f.label :organizer %><br/>
+  <%= f.collection_select :organizer_id, current_user.organizers, :id, :name, {}, {:class => 'form-control'} %> <br/>
+  
+  <small><%= link_to 'Add new organizer', new_organizer_path %> </small>
+</div>
+
+<div class="form-group col-md-12">
+  <%= f.label :category %>
+  <%= f.collection_select :category_id, Explorer::Category.all, :id, :name, {:selected => 1}, { class: 'form-control' }%>
+</div>
+
+<div class="form-group col-md-12">
+  <hr/>
+</div>
+
+<div class="form-group col-md-12">
+	<%= f.label :title %><br/>
+	<%= f.text_field :title, :class=> 'form-control', :required => true %> 
+</div>
+
+<div class="form-group col-md-12">
+  <hr/>
+</div>
+
+<div class="form-group col-md-3">
+	<%= f.label :start_date %><br/>
+	<%= f.date_field :start_date, :class=> 'form-control', :required => true %> 
+</div>
+
+<div class="form-group col-md-3">
+  <%= f.label :end_date %><br/>
+  <%= f.date_field :end_date, :class=> 'form-control', :required => true %> 
+</div>
+
+<div class="form-group col-md-3">
+	<%= f.label :start_time %><br/>
+	<%= f.time_field :start_time, :class=> 'form-control', :required => true%> 
+</div>
+
+<div class="form-group col-md-3">
+  <%= f.label :end_time %><br/>
+  <%= f.time_field :end_time, :class=> 'form-control', :required => true %> 
+</div>
+
+<div class="form-group col-md-12">
+  <hr/>
+</div>
+<div class="form-group col-md-6">
+	<%= f.label :cost  %><small>('If free event, enter 0')</small><br/>
+	<%= f.text_field :cost, :class=> 'form-control', :required => true   %> 
+</div>
+
+<div class="form-group col-md-6">
+	<%= f.label :link %><br/>
+	<%= f.url_field :link, :class=> 'form-control', :required => true%> 
+</div>
+
+<div class="form-group col-md-12">
+  <%= image_tag(@event.image) if @event.image? %><br/>
+  <%= f.label :image %><br/>
+  <%= f.text_field :image, :class=> 'form-control', :hint=>'760x428px' %> 
+  <small>Image will be cropped to fit 850x400px</small>
+ <!--  <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png', :class => "form-control" %> -->
+</div>
+<div class="form-group col-md-12">
+  <hr/>
+</div>
+
+
+<div class="form-group col-md-12">
+  <%= f.label :excerpt  %><br/>
+  <%= f.text_area :excerpt, :class=> 'form-control', rows: 5, :required => true %> 
+</div>
+
+<div class="form-group col-md-12">
+  <hr/>
+</div>
+
+<div class="form-group col-md-12">
+	<%= f.label :description  %><br/>
+	<%= f.cktext_area  :description, :class=> 'form-control', rows: 5, :required => true %> 
+</div>
+
+<% if user_signed_in? %>
+  <% if current_user.has_role? :admin %>
+  <div class="form-group col-md-12">
+    <%= f.label :embed  %><br/>
+    <%= f.text_area :embed, :class=> 'form-control', rows: 5 %> 
+  </div>
+  <% end %>
+<% end %>
+
+<div class="page-header col-md-12">
+  <h3>Select your venue or add a new venue</h3>
+</div>
+
+<p><a data-toggle="collapse" data-target="#selectVenue" aria-expanded="false" aria-controls="selectVenue">
+  Select existing venue
+</a></p>
+<div class="collapse" id="selectVenue">
+  <div class="form-group col-md-12">
+    <%= f.label :venue, "Select venue " %> 
+    <%= f.collection_select :venue_id, Explorer::Venue.all, :id, :name, {
+        include_blank: "Please select..." }, { class: 'form-control' } %>
+  </div>
+</div>
+
+<p><a data-toggle="collapse" data-target="#addVenue" aria-expanded="false" aria-controls="addVenue">
+  Add new venue
+</a></p>
+<div class="collapse" id="addVenue">
+  <%= f.fields_for(:venue)  do |ff| %>
+    <% render :partial=> 'explorer/venues/form', :locals=>{f:f, ff: ff} %>
+  <% end %>
+</div>
+<div class="form-group col-md-12">
+  <hr/>
+</div>

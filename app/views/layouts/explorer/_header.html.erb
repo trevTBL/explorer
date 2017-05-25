@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title> <%= full_title(yield(:title)) %> </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<%= yield(:description) %>">
+    <!--FACEBOOK-->
+    <meta property="og:title" content="<%= full_title(yield(:title)) %>">
+    <link rel="canonical" href="<%= default_url(yield(:url)) %>"> 
+    <meta property="og:site_name" content="Black Tech Event Calendar">
+    <meta property="og:url" content="<%= default_url(yield(:url)) %>">
+    <meta property="og:description" content="<%= default_description(yield(:description))%>">
+    <meta property="og:image" content="<%= default_image(yield(:image)) %>">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <!--TWITTER-->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="<%= full_title(yield(:title)) %>">
+    <meta property="twitter:description" content="<%= default_description(yield(:description))%>">
+    <meta property="twitter:site" content="@<%= default_twitter(yield(:twitter))%>">
+    <meta property="twitter:url" content="<%= default_url(yield(:url)) %>">
+    <meta property="twitter:image" content="<%= default_image(yield(:image)) %>">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+  	<link href='https://fonts.googleapis.com/css?family=Signika:400,600,700,300' rel='stylesheet' type='text/css'>
+	<%= stylesheet_link_tag    'explorer/application', media: 'all' %>
+	<%= favicon_link_tag %>
+  <%= javascript_include_tag 'explorer/application' %>
+     <script src="//maps.google.com/maps/api/js?key=AIzaSyDXYWw4R9xIVBMIXxJ5i4rd0xIcheH5svs"></script>
+    <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+    <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> 
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	
+		
+			<nav class="navbar navbar-default navbar-fixed-top">
+			  <div class="top-bar hidden-sm hidden-xs">
+			    <div class="col-md-6">
+			      <ul class="list-inline">
+			        <li><%= link_to 'About', main_app.about_url(:host => request.domain) %></li>
+			        <li><%= link_to 'Platform', main_app.platform_url(:host => request.domain) %></li>
+			        <li><%= link_to 'Join the crew', main_app.contribute_url(:host => request.domain) %></li>
+			        <li><%= link_to 'Get the newsletter', main_app.newsletter_url(:host => request.domain) %></li>
+			      </ul>
+			    </div>
+			    <div class="col-md-6 text-right">
+			      <ul class="list-inline">
+			        <li><%= link_to 'Register', main_app.join_url(:host => request.domain) unless user_signed_in? %></li>
+			        <li><%= link_to 'Log in', main_app.login_url(:host => request.domain) unless user_signed_in?  %></li>
+			        <li><%= link_to 'Navigator', root_url(:host => request.domain) if user_signed_in? %></li>
+			        <li><%= link_to 'Community', main_app.root_url(:host => request.domain) if user_signed_in? %></li>
+			        <li><%= link_to 'Help', 'https://techwhileblack.freshdesk.com', :target=>"_blank" %></li>
+			        <li><%= link_to 'Contact', main_app.contact_url(:host => request.domain) %></li>
+			      </ul>
+			    </div>
+			  </div>
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <%= link_to root_url, :class=>'navbar-brand' do %>
+		      	<%= image_tag 'explorer/logo.png' %>
+		      <% end %>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li><%= link_to 'Add Event', new_event_path %></li>
+		      	<li><%= link_to 'Find Events', root_url if user_signed_in? %></li>
+		   			<li><%= link_to 'Browse Organizers', root_url if user_signed_in? %></li>
+		      	<!-- <li><%= link_to 'My Tickets', my_tickets_path if user_signed_in? %></li> -->
+		      	<li><%= link_to 'My Events', my_events_path if user_signed_in? %></li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+	

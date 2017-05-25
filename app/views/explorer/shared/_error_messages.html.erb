@@ -1,0 +1,14 @@
+<% if object.errors.any? %>
+  <p class="alert alert-error"><%= pluralize(object.errors.count, "error") %> prohibited this form from being saved. The following fields are required:</p>
+  <ul>
+    <% object.errors.messages.each do |msg| %>
+      <% msg[1].each do |m| %>
+         <% if msg[0].to_s.split(".")[-1] == "base" %>
+             <li><%= m %></li>
+         <% else %>
+             <li><%= msg[0].to_s.split(".")[-1].humanize.titlecase %> <%= m %></li>
+         <% end %>
+           <% end %>
+    <% end %>
+  </ul> 
+<% end %>

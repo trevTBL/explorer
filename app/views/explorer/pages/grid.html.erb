@@ -1,0 +1,8 @@
+<%= render :partial=> 'events/cats' %>
+
+<div id="js-grid-juicy-projects" class="cbp">
+    <% @events.each do |e| %>
+        <%= render :partial=> 'events/event', :locals=>{e: e} %>
+    <% end %>
+</div>
+

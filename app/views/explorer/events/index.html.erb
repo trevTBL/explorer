@@ -1,0 +1,32 @@
+<% provide(:title , 'Find Events' ) %>
+<% content_for :map do %>
+<div style='width: 100%;' class="map-holder">
+  <div id="map" style='width: 100%; height: 400px;'></div>
+</div>
+ <script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+       markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+       handler.getMap().setZoom(6)
+    });
+  </script>
+<% end %>
+<hr/>
+<div class="pull-right">
+	<%= render :partial=> 'explorer/shared/social_share' %>
+</div>
+<hr/>
+
+<h2>All Events
+	<%= render :partial=> 'explorer/shared/toggle_nav' %>
+</h2>
+
+<%= render :partial=> 'explorer/shared/cats' %>
+
+<div id="js-grid-juicy-projects" class="cbp">
+	<% @events.each do |e| %>
+		<%= render :partial=> 'explorer/events/event', :locals=>{e: e} %>
+	<% end %>
+</div>

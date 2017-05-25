@@ -1,0 +1,39 @@
+<div class="container">
+<h2>Events this week
+	<div class="dropdown">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	    Change
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	    <li><a href="/day">Day</a></li>
+	    <li><a href="/week">Week</a></li>
+	    <li><a href="/month">Month</a></li>
+	  </ul>
+	</div>
+</h2>
+
+
+<% @days_from_this_week.each do |day| %>
+	<% start_time = day %>
+ 	<% end_time = 1.day.since(start_time) %>
+
+ 	<% event = @events.where('event_date >= ? and event_date < ?',start_time, end_time) %>
+	<div class="day col-md-12">
+		<% if !event.empty? %>
+		<h3 class="weekday"> <%= start_time.strftime('%A, %b %d') %></h3>
+		<div id="js-grid-juicy-projects" class="cbp">
+		 	<% event.each do |e| %>
+		 	 <%= render :partial=> 'events/event', :locals=>{e: e} %>
+		 	<% end %>
+		 	</div>
+	 	<% else %>
+	 	<% next %>
+		 	<!--  <p class="text-center">
+		 	 	No events today. <%= link_to 'Suggest Event', new_event_path, :class=>'btn btn-success btn-xs' %>
+		 	 </p> -->
+	 	
+	 	<% end %>
+	 </div>
+	 <% end %>
+</div>

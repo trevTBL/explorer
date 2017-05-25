@@ -1,0 +1,148 @@
+// Place all the styles related to the feeds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$black: #000000;
+$purple: #4527A0;
+$med-gray: #607D8B;
+$red: #D32F2F;
+$white: #FAFAFA;
+$light-gray: #e7e7e7;
+$gold: #e6ae48;
+$dark-gray: #37474F;
+
+.navbar-brand {
+    float: left;
+    height: 50px;
+    font-size:3rem;
+    padding:0;
+    font-size: 18px;
+    line-height: 20px;
+}
+.navbar>.container-fluid .navbar-brand {
+    margin-left: -18px;
+}
+
+.navbar-default{
+    background-color: $black;
+    border:0;
+    border-bottom:1px solid $white;
+    padding-bottom:4px;
+    margin-bottom:24px;
+
+    a, .navbar-brand, .navbar-nav>li>a{
+    	color:$white;
+    }
+
+    .navbar-toggle{
+    	background-color: $white;
+    }
+
+    .container-fluid{
+      padding-right:48px;
+      padding-left:48px;
+    }
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover{
+	color: $gold;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: $white;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: $white;
+    background-color: $black;
+}
+
+.nav-social{
+  background:#000;
+
+  .fa{
+    font-size:1.4rem;
+    color:#fff;
+  }
+
+}
+
+.dropdown-menu {
+    background-color:$black;
+    color:$white;
+
+    li>a{
+    	color:$white;
+    }
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: $white;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+    color: $white;
+    background-color: $med-gray;
+}
+
+.nav-tabs.nav-justified{
+
+li{
+	background:$med-gray;
+  color:$white;
+
+a {
+    border-bottom: 0;
+    border-radius: 0;
+    color:$white;
+  }
+
+  &.active{
+  	background:$white;
+  	
+  	a{
+  		color:$med-gray;
+  	}
+  }
+ }
+}
+
+.nav-tabs>li>a:hover {
+	color:$white;
+	background:inherit;
+	border:none;
+}
+
+.nav-image{
+  width:32px;
+}
+
+.memberNav{
+  background-color:#222 !important;
+    &.bg-faded, &.navbar-light .navbar-brand, &.navbar-light .navbar-nav .nav-link {
+      background-color:#222 !important;
+    }
+}
+
+.top-bar{
+  background-color:$gold;
+  padding:0 24px;
+  margin:0;
+  font-size:1.2rem;
+  color:#000;
+  height:26px;
+  line-height:26px;
+
+  p{
+    margin:0;
+  } 
+
+  a{
+    color:#000;
+  }
+
+   a:hover, a:focus, a:active{
+    color:$red;
+  }
+}

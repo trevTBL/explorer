@@ -1,0 +1,60 @@
+<div class="col-md-3 col-md-offset-1 event-sidebar-1">
+	<div class="well share-links">
+		<small>Share this event on:</small>
+				<%= social_share_button_tag(
+						title,
+						:url => short_link, 
+						:image => event_img,
+						desc: description, 
+						via: twitter_handle
+						) %>
+	</div>
+	<div class="well short-link">
+		<small>Share this link <i class="fa fa-arrow-down"></i> </small>
+		<%= link_to short_link %>
+	</div>
+	<!-- 	<small><%= @event.shortened_urls.last.use_count %></small> -->
+	
+	<h4>Happening at:</h4>
+	<address>
+		<strong><%= @event.venue.name %></strong><br/>
+		<%= @event.venue.address1 %><br />
+		<%= @event.venue.address2 + '<br/>' if !@event.venue.address2.blank? %>
+		<%= @event.venue.city %>, 
+		<%= @event.venue.state %>
+		<%= @event.venue.zip %><br />
+	</address>
+
+	<h4>Organized by</h4>
+	<p><%= @event.organizer %></p>
+	<hr/>
+	<span class="fa-stack fa-lg">
+	  <i class="fa fa-square-o fa-stack-2x"></i>
+	  <i class="fa fa-ticket fa-stack-1x"></i>
+	</span>
+	<%= link_to 'Event Website', @event.link, :target=>"blank", :rel => 'nofollow' if !@event.link.blank? %>
+	<br/>
+	<span class="fa-stack fa-lg">
+	  <i class="fa fa-square-o fa-stack-2x"></i>
+	  <i class="fa fa-globe fa-stack-1x"></i>
+	</span>
+	<%= link_to 'Organizer Website', @event.website, :target=>"blank", :rel => 'nofollow' if !@event.website.blank? %>
+	<br/>
+	<span class="fa-stack fa-lg">
+	  <i class="fa fa-square-o fa-stack-2x"></i>
+	  <i class="fa fa-twitter fa-stack-1x"></i>
+	</span>
+	<%= link_to 'Organizer Twitter', @event.twitter, :target=>"blank", :rel => 'nofollow' if !@event.twitter.blank?%>
+	<br>
+	<span class="fa-stack fa-lg">
+	  <i class="fa fa-square-o fa-stack-2x"></i>
+	  <i class="fa fa-facebook fa-stack-1x"></i>
+	</span>
+	<%= link_to 'Organizer Facebook', @event.facebook, :target=>"blank", :rel => 'nofollow' if !@event.facebook.blank?%>
+	<br>
+	<hr/>
+	<p>
+		<%= link_to 'Get Tickets - '+ @event.is_free? , @event.link, :class=>"btn btn-success btn-lg btn-block", :target=>"blank", :rel => 'nofollow'  %>
+	</p>
+	<%= raw(@event.embed) %>
+</div>

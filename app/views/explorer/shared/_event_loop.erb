@@ -1,0 +1,6 @@
+<% @events.each do |e| %>
+	<% if e.start_date >= @start_time && e.start_date <= @end_time %>
+		 	<%= render :partial=> 'events/event', :locals=>{e: e} %>
+	
+	<% end %>
+<% end %>

@@ -1,0 +1,25 @@
+<% provide(:title , 'Edit Organizer' ) %>
+
+<div class="submission-form">
+	<p class="lead">Edit Your Profile</p>
+	<%= render 'shared/error_messages', :object => @organizer %>
+	<hr/>
+	<%= form_for @organizer, :html => {:multipart => true} do |f| %>
+		<%= render :partial=> 'form', :locals=>{f: f} %>
+	<% end %>
+</div>
+<!-- <hr/>
+<div class="submission-form">
+	<p class="lead">Add Team Members</p>
+	<hr/>
+	<%# form_for @membership  do |f| %>
+		<div class="form-group">
+			<%# f.collection_select :user_id, User.all, :id, :name, {}, {:class => 'form-control'} %>
+		</div>
+		<%# f.hidden_field :organizer_id, :value => @organizer.id %>
+		<div class="form-group">
+			<%# f.submit 'Add team member', :class=>'btn btn-success btn-sm' %>
+		</div>
+	<%# end %>
+
+</div> -->

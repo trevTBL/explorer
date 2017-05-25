@@ -1,0 +1,36 @@
+<div class="clearfix"></div>
+<footer class="footer text-center">
+  <ul class="list-inline nav-social">
+    <li>
+      <a href="http://twitter.com/techwhileblack" target="_blank">
+      	<i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a href="http://facebook.com/techwhileblack" target="_blank">
+      	<i class="fa fa-facebook"></i></a>
+    </li>
+    <li>
+      <a href="http://instagram.com/techwhileblack" target="_blank"><i class="fa fa-instagram"></i></a>
+    </li>
+  </ul>
+  <div class="no-gutters">
+    <div class="col-md-6 col-sm-12">
+     <p> &copy; <%= Time.now.strftime('%Y') %>  Tech While Black | Navigator</p>
+   </div>
+   <div class="col-md-6 col-sm-12">
+    <%= link_to 'Built on Thurman', 'https://thurmancms.herokuapp.com/' %> by <a href="http://dmml.tech/">dmml.tech</a>
+   </div>
+ </div>
+</footer>
+	
+	<!-- load jquery -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- load cubeportfolio -->
+    <script type="text/javascript" src="<%= javascript_url 'explorer/jquery.cubeportfolio.js' %>"></script>
+    <!-- init cubeportfolio -->
+    <script type="text/javascript" src="<%= javascript_url 'explorer/main' %>"></script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<% provide(:title , 'Events Happening Now' ) %>
+
+<div class="pull-right">
+	<div class="pull-right">
+		<%= render :partial=> 'shared/social_share' %>
+	</div>
+
+<h2>Events this day</h2>
+
+<% event = @events %>
+<div id="js-grid-juicy-projects" class="cbp">
+	<% if !event.empty? %>
+	 	<% event.each do |e| %>
+	 		<%= render :partial=> 'events/event', :locals=>{e: e} %>
+	 	<% end %>
+	<% else %>
+	 	no events today. Why not <%= link_to 'post one',new_event_path %> ?
+	<% end %>
+</div>
+	
+

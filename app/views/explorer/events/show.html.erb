@@ -1,0 +1,100 @@
+<% event_img = @event.image ? @event.image : @event.default_image %>
+<% twitter_handle = @event.twitter ? @event.twitter : 'techwhileblack' %>
+<% short_link = Shortener::ShortenedUrl.generate(event_path(@event),owner: @event) %>
+<% short_link = root_url+short_link.unique_key %>
+
+<% title = raw @event.title %>
+<% provide(:title , title ) %>
+<% description = strip_tags(@event.excerpt) %>
+<% provide(:description, description )%>
+<% provide(:url, event_url(@event) )%>
+<% image = image_url(event_img) %>
+<% provide(:image, image )%>
+<% provide(:twitter, twitter_handle)%>
+
+<div class="col-md-8 event-wrapper">
+	<div class="event-image">
+		<img src="<%= event_img %>" alt="<%= @event.title%>" class="img-responsive">
+	</div>
+	<div class="event-content col-md-12">
+		<div class="event-title">
+			<h2><%= @event.title %></h2>
+		</div>
+		<p><%= simple_format(@event.description) if @event.description? %></p><br/>
+
+		<div class="event-meta row">
+			<div class="col-md-6">
+				<p><span>Starts:</span>	<br/>
+				<%= @event.first_day %> <br/> <%=  @event.begins_at %></p>
+			</div>
+			<div class="col-md-6">
+			<p><span>Ends:</span> <br/>
+				<%= @event.last_day %> 
+				 <br/> <%=  @event.ends_at %>
+				</p>
+			</div>
+			<div class="col-md-12">
+				<hr/>
+				<h4>Category</h4>
+				<p>
+					<span class="label label-default"><%= @event.category.name if !@event.category != nil %></span>
+				</p>
+			</div>
+		</div>
+
+		<% if user_signed_in? %>
+		  <% if can? :update, @event %>
+				<small><%= link_to '(edit)', edit_event_path(@event) %></small>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+
+<div class="col-md-3 col-md-offset-1 event-sidebar-1">
+
+	<p>
+		<%= link_to 'Attend Event - '+ @event.is_free? , @event.link, :class=>"btn btn-success btn-lg btn-block", :target=>"blank", :rel => 'nofollow'  %>
+	</p>
+	<hr/>
+	<div class="well share-links">
+		<small>Share this event on:</small>
+				<%= social_share_button_tag(
+						title,
+						:url => short_link, 
+						:image => event_img,
+						desc: description, 
+						via: twitter_handle
+						) %>
+	</div>
+	<div class="well short-link">
+		<small>Share this link <i class="fa fa-arrow-down"></i> </small>
+		<%= link_to short_link %>
+	</div>
+	<!-- 	<small><%= @event.shortened_urls.last.use_count %></small> -->
+	
+	<h4>Happening at:</h4>
+	<address>
+		<strong><%= link_to @event.venue.name, venue_path(@event.venue) %></strong><br/>
+		<%= @event.venue.address1 %><br />
+		<%= @event.venue.address2 if !@event.venue.address2.blank? %><br/>
+		<%= @event.venue.city %>, 
+		<%= @event.venue.state %>
+		<%= @event.venue.zip %><br />
+	</address>
+<% if @org.present? %>
+	<h4>Organized by</h4>
+	<p><%= link_to @org.name, @org %></p>
+	<p><%= simple_format(@org.description) %></p>
+
+
+	<% end %>
+	
+
+<!-- 	<%# raw(@event.embed) %>
+<%# if @event.prev != nil %><i class="fa fa-arrow-left"></i> <%# link_to "Previous Event", @event.prev  %> <%# end %>
+<%# if @event.next != nil %> || <%# link_to "Next Event ", @event.next %><i class="fa fa-arrow-right"></i><%# end %> -->
+
+</div>
+
+
+

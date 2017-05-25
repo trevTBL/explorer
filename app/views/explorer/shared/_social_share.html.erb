@@ -1,0 +1,13 @@
+<% if !@events.empty? %>
+<% event_img = @events.last.image ? @events.last.image : 'fallback/default.png' %>
+<% event_link = image_url(event_img) %>
+
+<small>Share this page on:</small>
+	<%= social_share_button_tag(
+		'Discover and Share black tech community events', 
+		:url => 'http://techwhileblack.com', 
+		:image => event_link,
+		desc: "Black Tech Event Calendar", 
+		via: 'techwhileblack'
+		) %>
+	<% end %>

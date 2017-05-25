@@ -1,0 +1,21 @@
+<h1>Black Tech Organizations and Communities</h1>
+
+<div class="table-responsive">
+	<table class="table">
+
+		<% @Listings.each do |listing| %>
+			<tr>
+				<% if listing.organizer_id.blank? %>
+					<td><%= link_to listing.name, listing_path(listing) %></td>
+				<% else %>
+					<td><%= link_to listing.name, organizer_path(listing.organizer) %></td>
+				<% end %>
+				<td><%= listing.category.name %></td>
+				<td><%= listing.city %></td>
+				<td><%= listing.state %></td>
+				<td><%= listing.zip %></td>
+			</tr>
+		<% end %>	
+
+	</table>
+</div>

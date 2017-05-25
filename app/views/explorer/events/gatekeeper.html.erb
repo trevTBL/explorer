@@ -1,0 +1,68 @@
+<% provide(:title , 'Gatekeeper' ) %>
+
+<h2>Gatekeeping</h2>
+<%= link_to "Change your password", edit_user_registration_path %>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation">
+        <a href="#active" aria-controls="active" role="tab" data-toggle="tab">Active</a>
+    </li>
+    <li role="presentation">
+        <a href="#inactive" aria-controls="inactive" role="tab" data-toggle="tab">Inactive</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="active">
+        <table class="table">
+            <tr>
+                <th>Title</th>
+                <th>Cost</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Category</th>
+                <th>Organizer</th>
+                <th>Venue</th>
+            </tr>
+            <% @active.each do |e| %>
+                
+                <tr>
+                    <td><%= link_to e.title, edit_event_path(e), :target=>'blank' %></td>
+                    <td><%= e.start_date.strftime("%a, %b %d")  %></td>
+                    <td><%= e.start_time.strftime("%I:%M %p")  %></td>
+                    <td><%= e.category.name  %></td>
+                    <td><%= e.organizer %></td>
+                    <td><%= e.venue.name %></td>
+                    <td>$<%= e.cost %></td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="inactive">
+        <table class="table">
+            <tr>
+                <th>Title</th>
+                <th>Cost</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Category</th>
+                <th>Organizer</th>
+                <th>Venue</th>
+            </tr>
+            <% @inactive.each do |e| %>
+                <tr>
+                    <td><%= link_to e.title, edit_event_path(e), :target=>'blank'  %></td>
+                    <td><%= e.start_date.strftime("%a, %b %d")  %></td>
+                    <td><%= e.start_time.strftime("%I:%M %p")  %></td>
+                    <td><%= e.category.name  %></td>
+                    <td><%= e.organizer %></td>
+                    <td><%= e.venue.name %></td>
+                    <td>$<%= e.cost %></td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+  </div>
+
+</div></h2>

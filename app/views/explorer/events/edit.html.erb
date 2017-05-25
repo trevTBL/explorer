@@ -1,0 +1,20 @@
+<% provide(:title , 'Edit Event' ) %>
+
+<div class="submission-form">
+	<small><%= link_to 'Back', @event %></small>
+	<h2>Editing <%= @event.title %></h2>
+<%= render 'shared/error_messages', :object => @event %>
+<%= form_for @event, :html => {:multipart => true} do |f| %>	
+	<%= render :partial=> 'form', :locals=>{f: f} %>
+	<%= f.submit 'Edit Event', :class=>'btn btn-success btn-lg btn-block' %>
+<% end %>
+<% if can? :delete, @event %>
+	<div class="text-center">
+		<hr/>
+		<small>
+			<%= link_to 'Delete event', event_path(@event),
+	                    method: :delete, data: { confirm: 'Are you sure?' }   %>
+		</small>
+	</div>
+<% end %>
+</div>

@@ -1,0 +1,16 @@
+<% provide(:title , 'Edit Venue' ) %>
+
+<div class="submission-form">
+	
+	<div class="container">
+		<small><%= link_to 'Back', @venue %></small>
+		<h2>Editing <%= @venue.name %></h2>
+	</div>
+
+	<%= render 'shared/error_messages', :object => @venue %>
+	<%= form_for(@venue) do |ff| %>
+		<%= render :partial=> 'form', :locals=>{ff:ff} %>
+		<%= ff.submit 'Update Venue', :class=>'btn btn-primary btn-lg btn-block' %>
+	<% end %>
+
+</div>

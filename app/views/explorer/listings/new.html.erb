@@ -1,0 +1,25 @@
+<div class="col-md-4 col-md-offset-4">
+	<h1>Add new listing</h1>
+	<hr/>
+
+	<%= simple_form_for @listing do |f| %>
+		<%= render 'shared/error_messages', :object => @listing %>
+		<% if !current_user.has_role? :admin && !@organizers.blank? %>
+			<%= f.label :organizer %>
+  		<%= f.collection_select :organizer_id, @organizers, :id, :name, {}, {:class => 'form-control'} %>
+		<% end %>
+		<p>
+			<%= f.input :name, :label=>'Name of Organization/Community/Initiative' %>
+		</p>
+		<p>
+		  <%= f.label :category %>
+		  <%= f.collection_select :category_id, Explorer::Category.all, :id, :name, {:selected => 1}, { class: 'form-control' }%>
+		</p>
+		<%= f.input :url, :label=>'Website URL'  %>
+		<%= f.input :city %>
+		<%= f.input :state %>
+		<%= f.input :zip %>
+		<hr/>
+		<%= f.submit 'Add Listing', :class=> 'btn btn-primary btn-block' %>
+	<% end %>
+</div>

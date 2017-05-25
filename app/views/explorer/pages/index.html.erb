@@ -1,0 +1,8 @@
+<div class="pull-right">
+	<small>Share this page on:</small>
+	<%= social_share_button_tag("Black Tech Event Calendar",:url => "http://geekallweek/", desc: "Curated events for Discerning Tech Geeks", via: "geeknicity",:image => image_url('fallback/default.png') ) %>
+</div>
+<% @users.each do |u| %>
+	<%= u.email %>
+<% end %>
+

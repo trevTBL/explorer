@@ -1,0 +1,24 @@
+<div class="cbp-item <%= e.category.name %>">
+    <div class="cbp-caption">
+        <div class="cbp-caption-defaultWrap">
+            <img src="<%= e.image ? e.image : e.default_image %>" alt="<%= e.title%>" class="img-responsive">
+        </div>
+        <div class="cbp-caption-activeWrap">
+            <div class="cbp-l-caption-alignCenter">
+                <div class="cbp-l-caption-body">
+                    <%= link_to 'Get Tickets', e.link, :class =>'btn btn-primary',:rel => 'nofollow' ,:target => "_blank" %>
+                    <%= link_to 'View Details', e, :class =>'btn btn-primary' %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cbp-l-grid-projects-title"> <%= link_to e.title, e %></div>
+    <div class="cbp-l-grid-projects-desc">
+        <div class="col-md-6">
+            <i class="fa fa-calendar"></i> <%=  e.first_day %> 
+        </div> 
+        <div class="col-md-6">
+            <i class="fa fa-clock-o"></i> <%= e.begins_at %> 
+        </div>
+    </div>  
+</div>

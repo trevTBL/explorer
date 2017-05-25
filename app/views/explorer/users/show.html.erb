@@ -1,0 +1,33 @@
+<% provide(:title , @user.name ) %>
+
+<div class="col-md-6 col-md-offset-3">
+	<div class="page">
+		<div class="row">
+			<h2 class="page-header">
+				<%= @user.name %>
+				<% if user_signed_in? && current_user.has_role?(:admin) %>
+					<small><%= link_to '(edit)', main_app.manage_account_path %></small>
+				<% end %>
+			</h2>
+		</div>
+		<div class="row">
+			<h3>My Event Teams</h3>
+			<% @user.memberships.each do |m| %>
+				<p>
+					<%= link_to m.organizer.name, m.organizer if m.organizer %><%= ' (owner)' if m.owner? %>
+				</p>
+			<% end %>
+		</div>
+		<div class="row">
+			<!-- <hr/>
+			<h3>My Bookings</h3>
+			<%# @user.bookings.each do |b| %>
+				<p><%# link_to b.event.title, b.event %></p>
+			<%# end %> -->
+			<h3>Upcoming Events</h3>
+			<% @user_events.each do |e| %>
+				<p><%= link_to e.title, e %>, <%= e.first_day %>, <%= e.begins_at %></p>
+			<% end %>
+		</div>
+	</div>
+</div>
