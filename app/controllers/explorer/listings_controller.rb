@@ -14,7 +14,7 @@ module Explorer
 
     def new
         @listing = Listing.new 
-        @organizers = Explorer::Organizer.eager_load(:listing).merge(Explorer::Listing.where(id: nil)
+        @organizers = Explorer::Organizer.eager_load(:listing).merge(Explorer::Listing.where(id: nil))
     end
         
 
