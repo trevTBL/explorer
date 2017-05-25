@@ -126,8 +126,8 @@ module Explorer
 		private
 
 		def get_parent
-        parent = Category.where(name: "Event").last
-        @event_categories = Category.where(parent_id: parent.id)
+        parent = Explorer::Category.where(name: "Event").last
+        @event_categories = Explorer::Category.where(parent_id: parent.id)
     end
 
 		def authorize_visitor
