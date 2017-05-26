@@ -9,6 +9,19 @@ module Explorer
 				redirect_to root_url and return
 			end
 			@venues = Venue.all
+			@hash = Gmaps4rails.build_markers(@venues) do |venue, marker|
+			  location_link = view_context.link_to 'View events at '+ venue.name, venue_path(venue)
+			  marker.lat venue.latitude
+			  marker.lng venue.longitude
+
+	      marker.infowindow "
+					<h4>#{venue.name}</h4>
+					<p>#{venue.address1 }</p>
+					<p>#{venue.address2 }<br/>
+					<p>#{venue.city }, #{venue.state }, #{venue.zip }</p>
+					<p><u>#{location_link}</u></p>
+				" 
+			end
 		end
 
 		def show

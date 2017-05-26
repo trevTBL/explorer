@@ -1,0 +1,15 @@
+<%= render :partial=> 'layouts/explorer/header' %>
+	 <% if yield(:map) %>
+       <%= yield(:map) %>
+    <% end %>
+	<div class="wrapper listing-wrapper">
+		<div class="container-fluid">
+			<% flash.each do |key, value| %>
+				<div class="alert alert-<%= key %>">
+				  <%= value %>
+				</div>
+			<% end %>
+			<%= yield %>
+		</div>
+	</div>
+<%= render :partial=> 'layouts/explorer/footer' %>

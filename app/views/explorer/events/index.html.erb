@@ -1,6 +1,6 @@
 <% provide(:title , 'Find Events' ) %>
-<% if !@event.empty? do %>
-  <% content_for :map do %>
+
+<% content_for :map do %>
   <div style='width: 100%;' class="map-holder">
     <div id="map" style='width: 100%; height: 400px;'></div>
   </div>
@@ -10,25 +10,26 @@
          markers = handler.addMarkers(<%=raw @hash.to_json %>);
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
-         handler.getMap().setZoom(6)
+         handler.getMap().setZoom(4)
       });
     </script>
   <% end %>
-<% end %>
 <hr/>
-<div class="pull-right">
-	<%= render :partial=> 'explorer/shared/social_share' %>
-</div>
-<hr/>
+<div class="listing-index">
+  <div class="pull-right">
+  	<%= render :partial=> 'explorer/shared/social_share' %>
+  </div>
+  <hr/>
 
-<h2>All Events
-	<%= render :partial=> 'explorer/shared/toggle_nav' %>
-</h2>
+  <h2>All Events
+  	<%= render :partial=> 'explorer/shared/toggle_nav' %>
+  </h2>
 
-<%= render :partial=> 'explorer/shared/cats' %>
+  <%= render :partial=> 'explorer/shared/cats' %>
 
-<div id="js-grid-juicy-projects" class="cbp">
-	<% @events.each do |e| %>
-		<%= render :partial=> 'explorer/events/event', :locals=>{e: e} %>
-	<% end %>
+  <div id="js-grid-juicy-projects" class="cbp">
+  	<% @events.each do |e| %>
+  		<%= render :partial=> 'explorer/events/event', :locals=>{e: e} %>
+  	<% end %>
+  </div>
 </div>

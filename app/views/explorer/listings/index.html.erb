@@ -1,9 +1,24 @@
+<% content_for :map do %>
+	<div style='width: 100%;' class="map-holder">
+	  <div id="map" style='width: 100%; height: 400px;'></div>
+	</div>
+	 <script type="text/javascript">
+	    handler = Gmaps.build('Google');
+	    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+	       markers = handler.addMarkers(<%=raw @hash.to_json %>);
+	      handler.bounds.extendWith(markers);
+	      handler.fitMapToBounds();
+	       handler.getMap().setZoom(4)
+	    });
+	  </script>
+<% end %>
+<div class="listing-index">
 <h1>Black Tech Organizations and Communities</h1>
 
 <div class="table-responsive">
 	<table class="table">
 
-		<% @Listings.each do |listing| %>
+		<% @listings.each do |listing| %>
 			<tr>
 				<% if listing.organizer_id.blank? %>
 					<td><%= link_to listing.name, listing_path(listing) %></td>
@@ -18,4 +33,5 @@
 		<% end %>	
 
 	</table>
+</div>
 </div>

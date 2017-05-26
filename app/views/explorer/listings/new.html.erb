@@ -4,7 +4,7 @@
 
 	<%= simple_form_for @listing do |f| %>
 		<%= render 'shared/error_messages', :object => @listing %>
-		<% if !current_user.has_role? :admin && !@organizers.blank? %>
+		<% if current_user.has_role? :admin %>
   		<%= f.input :organizer_id, 
         :label=> 'Organizer',
         collection:  @organizers,

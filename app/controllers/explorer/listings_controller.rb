@@ -5,7 +5,18 @@ module Explorer
     before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 
     def index
-        @Listings = Listing.all
+        @listings = Listing.all
+        @hash = Gmaps4rails.build_markers(@listings) do |listing, marker|
+            location_link = view_context.link_to listing.name, listing_path(listing)
+            marker.lat listing.latitude
+            marker.lng listing.longitude
+
+            marker.infowindow "
+            <h4>#{listing.name}</h4>
+            <p>#{listing.city }, #{listing.state }, #{listing.zip }</p>
+            <p><u>#{location_link}</u></p>
+            " 
+        end
     end
 
     def show

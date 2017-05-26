@@ -23,8 +23,8 @@ module Explorer
 					<p>#{event.venue.city }, #{event.venue.state }, #{event.venue.zip }</p>
 					<p><u>#{location_link}</u></p>
 				" 
-				get_parent
 			end
+			get_parent
 		end
 
 		def new
