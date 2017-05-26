@@ -1,2 +1,11 @@
-<h1>Listings#edit</h1>
-<p>Find me in app/views/explorer/listings/edit.html.erb</p>
+<% provide(:title , 'Edit Listing' ) %>
+
+<div class="col-md-4 col-md-offset-4">
+	<h1>Edit new listing</h1>
+	<hr/>
+	<%= simple_form_for @listing, :html => {:multipart => true} do |f| %>	
+		<%= render :partial=> 'form', :locals=>{f: f} %>
+		<hr/>
+		<%= f.submit 'Edit Listing', :class=>'btn btn-primary btn-block' %>
+	<% end %>
+</div>

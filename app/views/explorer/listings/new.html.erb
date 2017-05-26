@@ -1,40 +1,11 @@
+<% provide(:title , 'Add Listing' ) %>
+
 <div class="col-md-4 col-md-offset-4">
 	<h1>Add new listing</h1>
 	<hr/>
-
-	<%= simple_form_for @listing do |f| %>
-		<%= render 'shared/error_messages', :object => @listing %>
-		<% if current_user.has_role? :admin %>
-  		<%= f.input :organizer_id, 
-        :label=> 'Organizer',
-        collection:  @organizers,
-        selected:  @listing.organizer, 
-        include_blank: '- None -' ,
-        input_html: { class: 'chosen-select form-control' }  
-        %>
-		<% end %>
-		<p>
-			<%= f.input :name, :label=>'Name of Organization/Community/Initiative' %>
-		</p>
-		<p>
-		  <%= f.input :category_id, 
-        :label=> 'Category',
-        collection:  @organizer_categories,
-        selected:  @listing.category, 
-        include_blank: '- None -' ,
-        input_html: { class: 'chosen-select form-control' }  
-        %>
-		</p>
-		<%= f.input :url, :label=>'Website URL'  %>
-		<%= f.input :city %>
-			<%= f.input :state, 
-			:label=> 'State',
-			collection: state_options,
-			include_blank: '- None -' ,
-			input_html: { class: 'chosen-select form-control' }  
-			%>
-		<%= f.input :zip %>
+	<%= simple_form_for @listing, :html => {:multipart => true} do |f| %>	
+		<%= render :partial=> 'form', :locals=>{f: f} %>
 		<hr/>
-		<%= f.submit 'Add Listing', :class=> 'btn btn-primary btn-block' %>
+		<%= f.submit 'Add Listing', :class=>'btn btn-primary btn-block' %>
 	<% end %>
 </div>

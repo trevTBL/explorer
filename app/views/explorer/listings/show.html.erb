@@ -1,3 +1,12 @@
+<% twitter_handle = '@techwhileblack' %>
+<% short_link = Shortener::ShortenedUrl.generate(listing_path(@listing)) %>
+<% short_link = root_url + short_link.unique_key %>
+
+<% title = @listing.name %>
+<% provide(:title , title ) %>
+<% provide(:url, listing_url(@listing) )%>
+<% provide(:twitter, twitter_handle)%>
+
 <div class="col-md-6">
 	<div class="well text-center">
 		
