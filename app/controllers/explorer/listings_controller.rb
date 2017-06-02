@@ -70,6 +70,7 @@ module Explorer
     end
 
     private
+ 
     def get_parent
         parent = Category.where(name: "Organizer").last
         @organizer_categories = Category.where(parent_id: parent.id)
