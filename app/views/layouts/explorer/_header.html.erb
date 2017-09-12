@@ -54,9 +54,9 @@
 			      <ul class="list-inline">
 			        <li><%= link_to 'Register', main_app.register_url(:host => request.domain) unless user_signed_in? %></li>
 			        <li><%= link_to 'Log in', main_app.login_url(:host => request.domain) unless user_signed_in?  %></li>
-			        <li><%= link_to 'Market', market.root_url(:host => request.domain) if user_signed_in? %></li>
-			        <li><%= link_to 'Navigator', root_url(:host => request.domain) if user_signed_in? %></li>
-			        <li><%= link_to 'Community', main_app.root_url(:host => request.domain) if user_signed_in? %></li>
+			        <li><%= link_to 'Market', market.root_url(:host => request.domain)  if user_signed_in? && current_user.has_role?(:admin) %></li>
+			        <li><%= link_to 'Navigator', root_url(:host => request.domain)  if user_signed_in? && current_user.has_role?(:admin) %></li>
+			        <li><%= link_to 'Community', main_app.root_url(:host => request.domain)  if user_signed_in? && current_user.has_role?(:admin) %></li>
 			        <li><%= link_to 'Help', 'https://techwhileblack.freshdesk.com', :target=>"_blank" %></li>
 			        <li><%= link_to 'Contact', main_app.contact_url(:host => request.domain) %></li>
 			      </ul>
