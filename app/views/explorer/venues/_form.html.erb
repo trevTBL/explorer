@@ -1,7 +1,7 @@
 <div>
     <div class="form-group col-md-12">
       <%= ff.label :name %>
-      <%= ff.text_field :name, :class=> 'form-control'%>
+      <%= ff.text_field :name, :class=> 'form-control', required: false %>
     </div>
 
 
@@ -12,13 +12,13 @@
 
     <div class="form-group col-md-6">
       <%= ff.label :contact %>
-      <%= ff.text_field :contact, :class=> 'form-control' %>
+      <%= ff.text_field :contact, :class=> 'form-control', required: false %>
     </div>
 
 
     <div class="form-group col-md-6">
       <%= ff.label :phone  %>
-      <%= ff.telephone_field :phone, :class=> 'form-control' %>
+      <%= ff.telephone_field :phone, :class=> 'form-control', required: false %>
     </div>
 
   <div class="form-group col-md-12">
@@ -27,7 +27,7 @@
 
     <div class="form-group col-md-12">
       <%= ff.label :address1  %>
-      <%= ff.text_field :address1, :class=> 'form-control' %>
+      <%= ff.text_field :address1, :class=> 'form-control', required: false %>
     </div>
 
   <div class="form-group col-md-12">
@@ -36,7 +36,7 @@
 
     <div class="form-group col-md-12">
       <%= ff.label :address2  %>
-      <%= ff.text_field :address2, :class=> 'form-control' %>
+      <%= ff.text_field :address2, :class=> 'form-control', required: false %>
     </div>
 
   <div class="form-group col-md-12">
@@ -45,7 +45,7 @@
 
     <div class="form-group col-md-4">
       <%= ff.label :city %>
-      <%= ff.text_field :city, :class=> 'form-control' %>
+      <%= ff.text_field :city, :class=> 'form-control', required: false %>
     </div>
 
 
@@ -53,15 +53,17 @@
       <%= ff.input :state, 
       :label=> 'State',
       collection: state_options,
+      selected: @event.venue.state,
       include_blank: '- None -' ,
-      input_html: { class: 'chosen-select form-control' }  
+      input_html: { class: 'chosen-select form-control' } ,
+      required: false 
       %>
     </div>
 
 
     <div class="form-group col-md-4">
       <%= ff.label :zip  %>
-      <%= ff.text_field :zip, :class=> 'form-control' %>
+      <%= ff.text_field :zip, :class=> 'form-control', required: false %>
     </div>
 
   <div class="form-group col-md-12">
@@ -70,7 +72,7 @@
 
     <div class="form-group col-md-12">
       <%= ff.label :description  %>
-      <%= ff.cktext_area  :description, :class=> 'form-control ', rows: 5 %>
+      <%= ff.cktext_area  :description, :class=> 'form-control ', rows: 5, required: false %>
     </div>
     <div class="form-group col-md-12">
     <hr/>

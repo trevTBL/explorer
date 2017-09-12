@@ -17,3 +17,159 @@
     	<%= link_to 'Add Organizer Profile', new_organizer_path, :class=>'btn btn-primary' %>
   <% end %>
 </div>
+
+
+  <!-- Event Modal -->
+  <div class="modal fade" id="organizerModal" tabindex="-1" role="dialog" aria-labelledby="organizerModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-body">
+          <div class="submission-form">
+            <h2 class="page-header">Create an organizer profile</h2>
+            <%= simple_form_for @organizer do |f| %>
+              <div class="row">
+							  <div class="col-md-5">
+							    <div class="form-group">
+							    	<%= f.label :name %><br/>
+							    	<%= f.text_field :name, :class=> 'form-control', :required => true%> 
+							    </div>
+
+							    <div class="form-group">
+							      <%= f.label :logo %><br/>
+							      <%= f.text_field :logo, :class=> 'form-control', :placeholder=>'https://' %>
+							    </div>
+
+							    <div class="form-group">
+							      <%= f.label :url %><br/>
+							      <%= f.text_field :url, :class=> 'form-control', :placeholder=>'https://' %>
+							    </div>
+
+							    <div class="form-group">
+							      <%= f.label :twitter %><br/>
+							      <%= f.text_field :twitter, :class=> 'form-control', :placeholder=>'https://twitter.com' %>
+							    </div>
+
+							    <div class="form-group">
+							      <%= f.label :facebook %><br/>
+							      <%= f.text_field :facebook, :class=> 'form-control', :placeholder=>'https://facebook.com' %>
+							    </div>
+							  </div>
+							  <div class="col-md-7">
+							    <div class="form-group">
+							    	<%= f.label :description  %><br/>
+							    	<%= f.text_area  :description, :class=> 'form-control', :rows=> 13, :required => true %> 
+							    </div>
+							    <% if @organizer.listing && can?(:update, @organizer.listing) %>
+							      <%= link_to 'update directory details', edit_listing_path %>
+							    <% end %>
+							    <div class="form-group">
+							      <%= f.submit 'Create Profile', :class=>'btn btn-success btn-lg btn-block' %>
+							    </div>
+							  </div>
+							</div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Venue Modal -->
+<div class="modal fade" id="venueModal" tabindex="-1" role="dialog" aria-labelledby="venueModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(@venue) do |ff| %>
+					<div>
+				    <div class="form-group col-md-12">
+				      <%= ff.label :name %>
+				      <%= ff.text_field :name, :class=> 'form-control', required: false %>
+				    </div>
+
+
+				  <div class="form-group col-md-12">
+				    <hr/>
+				  </div>
+
+
+				    <div class="form-group col-md-6">
+				      <%= ff.label :contact %>
+				      <%= ff.text_field :contact, :class=> 'form-control', required: false %>
+				    </div>
+
+
+				    <div class="form-group col-md-6">
+				      <%= ff.label :phone  %>
+				      <%= ff.telephone_field :phone, :class=> 'form-control', required: false %>
+				    </div>
+
+				  <div class="form-group col-md-12">
+				    <hr/>
+				  </div>
+
+				    <div class="form-group col-md-12">
+				      <%= ff.label :address1  %>
+				      <%= ff.text_field :address1, :class=> 'form-control', required: false %>
+				    </div>
+
+				  <div class="form-group col-md-12">
+				    <hr/>
+				  </div>
+
+				    <div class="form-group col-md-12">
+				      <%= ff.label :address2  %>
+				      <%= ff.text_field :address2, :class=> 'form-control', required: false %>
+				    </div>
+
+				  <div class="form-group col-md-12">
+				    <hr/>
+				  </div>
+
+				    <div class="form-group col-md-4">
+				      <%= ff.label :city %>
+				      <%= ff.text_field :city, :class=> 'form-control', required: false %>
+				    </div>
+
+
+				    <div class="form-group col-md-4">
+				      <%= ff.input :state, 
+				      :label=> 'State',
+				      collection: state_options,
+				      selected: @event.venue.state,
+				      include_blank: '- None -' ,
+				      input_html: { class: 'chosen-select form-control' } ,
+				      required: false 
+				      %>
+				    </div>
+
+
+				    <div class="form-group col-md-4">
+				      <%= ff.label :zip  %>
+				      <%= ff.text_field :zip, :class=> 'form-control', required: false %>
+				    </div>
+
+				  <div class="form-group col-md-12">
+				    <hr/>
+				  </div>
+
+				    <div class="form-group col-md-12">
+				      <%= ff.label :description  %>
+				      <%= ff.cktext_area  :description, :class=> 'form-control ', rows: 5, required: false %>
+				    </div>
+				    <div class="form-group col-md-12">
+				    <hr/>
+				  </div>
+
+				</div>
+					<%= ff.submit 'Add Venue', :class=>'btn btn-success btn-lg btn-block'  %>
+				<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

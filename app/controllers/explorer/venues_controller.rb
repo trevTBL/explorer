@@ -5,15 +5,11 @@ module Explorer
 		before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 		
 		def index
-			if !current_user.has_role? :admin
-				redirect_to root_url and return
-			end
 			@venues = Venue.all
 			@hash = Gmaps4rails.build_markers(@venues) do |venue, marker|
 			  location_link = view_context.link_to 'View events at '+ venue.name, venue_path(venue)
 			  marker.lat venue.latitude
 			  marker.lng venue.longitude
-
 	      marker.infowindow "
 					<h4>#{venue.name}</h4>
 					<p>#{venue.address1 }</p>
@@ -47,7 +43,7 @@ module Explorer
 		def create
 			@venue = Venue.new(venue_params)
 			if @venue.save
-				redirect_to @venue
+				redirect_to :back
 			else
 				render 'new'
 			end

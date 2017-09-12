@@ -7,19 +7,22 @@
   <%= f.input :organizer_id, 
     :label=> 'Organizer',
     collection: current_user.organizers,
-    selected:  @event.category, 
+    selected:  @event.organizer.blank? ? current_user.memberships.last.organizer.id : @event.organizer.id, 
     include_blank: '- None -' ,
     input_html: { class: 'chosen-select form-control' }  
-    %><br/>
-  
-  <small><%= link_to 'Add new organizer', new_organizer_path %> </small>
+    %>
+      <small>
+        <a data-toggle="modal" data-target="#organizerModal">
+          Add new organizer
+        </a> 
+    </small>
 </div>
 
 <div class="form-group col-md-12">
   <%= f.input :category_id, 
     :label=> 'Category',
     collection:  @event_categories,
-    selected:  @event.category, 
+    selected:  @event.category.blank? ? @event.category : @event.category.id, 
     include_blank: '- None -' ,
     input_html: { class: 'chosen-select form-control' }  
     %>
@@ -31,7 +34,7 @@
 
 <div class="form-group col-md-12">
 	<%= f.label :title %><br/>
-	<%= f.text_field :title, :class=> 'form-control', :required => true %> 
+	<%= f.text_field :title, :class=> 'form-control' %> 
 </div>
 
 <div class="form-group col-md-12">
@@ -40,22 +43,22 @@
 
 <div class="form-group col-md-3">
 	<%= f.label :start_date %><br/>
-	<%= f.date_field :start_date, :class=> 'form-control', :required => true %> 
+	<%= f.date_field :start_date, :class=> 'form-control' %> 
 </div>
 
 <div class="form-group col-md-3">
   <%= f.label :end_date %><br/>
-  <%= f.date_field :end_date, :class=> 'form-control', :required => true %> 
+  <%= f.date_field :end_date, :class=> 'form-control' %> 
 </div>
 
 <div class="form-group col-md-3">
 	<%= f.label :start_time %><br/>
-	<%= f.time_field :start_time, :class=> 'form-control', :required => true%> 
+	<%= f.time_field :start_time, :class=> 'form-control'%> 
 </div>
 
 <div class="form-group col-md-3">
   <%= f.label :end_time %><br/>
-  <%= f.time_field :end_time, :class=> 'form-control', :required => true %> 
+  <%= f.time_field :end_time, :class=> 'form-control' %> 
 </div>
 
 <div class="form-group col-md-12">
@@ -63,12 +66,12 @@
 </div>
 <div class="form-group col-md-6">
 	<%= f.label :cost  %><small>('If free event, enter 0')</small><br/>
-	<%= f.text_field :cost, :class=> 'form-control', :required => true   %> 
+	<%= f.text_field :cost, :class=> 'form-control'   %> 
 </div>
 
 <div class="form-group col-md-6">
 	<%= f.label :link %><br/>
-	<%= f.url_field :link, :class=> 'form-control', :required => true%> 
+	<%= f.url_field :link, :class=> 'form-control'%> 
 </div>
 
 <div class="form-group col-md-12">
@@ -85,7 +88,7 @@
 
 <div class="form-group col-md-12">
   <%= f.label :excerpt  %><br/>
-  <%= f.text_area :excerpt, :class=> 'form-control', rows: 5, :required => true %> 
+  <%= f.text_area :excerpt, :class=> 'form-control', rows: 5 %> 
 </div>
 
 <div class="form-group col-md-12">
@@ -94,7 +97,7 @@
 
 <div class="form-group col-md-12">
 	<%= f.label :description  %><br/>
-	<%= f.cktext_area  :description, :class=> 'form-control', rows: 5, :required => true %> 
+	<%= f.cktext_area  :description, :class=> 'form-control', rows: 5 %> 
 </div>
 
 <% if user_signed_in? %>
@@ -118,21 +121,19 @@
     <%= f.input :venue_id, 
     :label=> 'Organizer',
     collection: Explorer::Venue.all,
-    selected:  @event.venue, 
+    selected:  @event.venue.blank? ? @event.venue : @event.venue.id, 
     include_blank: '- None -' ,
     input_html: { class: 'chosen-select form-control' }  
     %><br/>
   </div>
 </div>
 
-<p><a data-toggle="collapse" data-target="#addVenue" aria-expanded="false" aria-controls="addVenue">
-  Add new venue
-</a></p>
-<div class="collapse" id="addVenue">
-  <%= f.fields_for(:venue)  do |ff| %>
-    <% render :partial=> 'explorer/venues/form', :locals=>{f:f, ff: ff} %>
-  <% end %>
-</div>
+<p>
+  <a data-toggle="modal" data-target="#venueModal">
+    Add venue
+  </a>
+</p>
+
 <div class="form-group col-md-12">
   <hr/>
   <% if user_signed_in? %>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title> <%= full_title(yield(:title)) %> </title>
+	  <title> <%= full_title(yield(:title)) %> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<%= yield(:description) %>">
     <!--FACEBOOK-->
@@ -29,13 +29,13 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
   	<link href='https://fonts.googleapis.com/css?family=Signika:400,600,700,300' rel='stylesheet' type='text/css'>
-	<%= stylesheet_link_tag    'explorer/application', media: 'all' %>
-	<%= favicon_link_tag %>
-  <%= javascript_include_tag 'explorer/application' %>
+		<%= stylesheet_link_tag    'explorer/application', media: 'all' %>
+		<%= favicon_link_tag %>
+	  <%= javascript_include_tag 'explorer/application' %>
      <script src="//maps.google.com/maps/api/js?key=AIzaSyDXYWw4R9xIVBMIXxJ5i4rd0xIcheH5svs"></script>
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> 
-  <%= csrf_meta_tags %>
+  	<%= csrf_meta_tags %>
 </head>
 <body>
 	
@@ -52,8 +52,9 @@
 			    </div>
 			    <div class="col-md-6 text-right">
 			      <ul class="list-inline">
-			        <li><%= link_to 'Register', main_app.join_url(:host => request.domain) unless user_signed_in? %></li>
+			        <li><%= link_to 'Register', main_app.register_url(:host => request.domain) unless user_signed_in? %></li>
 			        <li><%= link_to 'Log in', main_app.login_url(:host => request.domain) unless user_signed_in?  %></li>
+			        <li><%= link_to 'Market', market.root_url(:host => request.domain) if user_signed_in? %></li>
 			        <li><%= link_to 'Navigator', root_url(:host => request.domain) if user_signed_in? %></li>
 			        <li><%= link_to 'Community', main_app.root_url(:host => request.domain) if user_signed_in? %></li>
 			        <li><%= link_to 'Help', 'https://techwhileblack.freshdesk.com', :target=>"_blank" %></li>

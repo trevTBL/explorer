@@ -10,7 +10,7 @@ module Explorer
 	  end
 
 	  def default_description(page_description = '')
-	    base_description = "Curated Events For Tech Geeks."
+	    base_description = "Curated Events For Black Tech Geeks."
 	    if page_description.empty?
 	      base_description
 	    else
@@ -37,7 +37,7 @@ module Explorer
 	  end
 
 	  def default_twitter(page_twitter = '')
-	    base_twitter = 'geeknocity' 
+	    base_twitter = 'techwhileblack' 
 	    if page_twitter.empty?
 	      base_twitter
 	    else

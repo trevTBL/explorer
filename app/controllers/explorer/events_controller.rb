@@ -7,9 +7,6 @@ module Explorer
 		
 
 		def index
-			if !current_user.has_role?(:admin)
-				redirect_to root_url and return
-			end
 			@events = Event.where(activated: true).order(start_date: :ASC)
 			@hash = Gmaps4rails.build_markers(@events) do |event, marker|
 			  location_link = view_context.link_to 'View events at '+ event.venue.name, venue_path(event.venue)
@@ -30,7 +27,8 @@ module Explorer
 		def new
 			@user = current_user
 			@event = Event.new
-			venue = @event.build_venue()
+			@organizer = Organizer.new
+			@venue = @event.build_venue()
 			get_parent
 		end
 
@@ -41,7 +39,7 @@ module Explorer
 			if @event.save
 				redirect_to confirm_path
 			else
-				venue = @event.build_venue() if @event.venue.blank?
+				@venue = @event.build_venue() if @event.venue.blank?
 				render action: "new"
 			end
 		end

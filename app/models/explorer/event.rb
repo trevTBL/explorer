@@ -27,6 +27,7 @@ module Explorer
 		has_many :participants, :through=> :groups
 
 		validates :title,
+			:organizer_id,
 			:category_id,
 			:start_date, 
 			:start_time, 
@@ -34,10 +35,11 @@ module Explorer
 			:description, 
 			presence: true
 
-		validates :venue_id, presence: true, :unless => 'venue.present?'
+		# validates :venue_id, presence: true, :unless => 'venue.present?'
 
+		validates :venue_id, presence: true
 		# validates :excerpt, length: {maximum: 130}
-		# validates :description, length: {minimum: 150}
+		validates :description, length: {minimum: 150}
 
 		def nil_if_blank
 			NULL_ATTRS.each { |attr| self[attr] = nil if self[attr].blank? }

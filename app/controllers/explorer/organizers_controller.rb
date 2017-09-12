@@ -6,9 +6,6 @@ module Explorer
 		# before_action :valid_org, :only => [:edit, :update, :destroy]
 
 		def index
-			if !current_user.has_role? :admin
-				redirect_to root_url and return
-			end
 			@organizers = Organizer.all
 		end
 
@@ -24,7 +21,7 @@ module Explorer
 					user_id: current_user.id, 
 					owner: true
 					)
-				redirect_to @organizer
+				redirect_to :back
 			else
 				render action: "new"
 			end
