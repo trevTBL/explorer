@@ -2,7 +2,8 @@ require_dependency "explorer/application_controller"
 
 module Explorer
   class CategoriesController < ApplicationController
-    before_action :authenticate_user!, :excerpt => [:show]
+    load_and_authorize_resource
+    # before_action :authenticate_user!, :excerpt => [:show]
     
      def index
         @categories = Category.all

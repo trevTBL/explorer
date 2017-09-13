@@ -2,8 +2,9 @@ require_dependency "explorer/application_controller"
 
 module Explorer
 	class EventsController < ApplicationController
-		before_action :authenticate_user!, :excerpt => [:show]
-		before_action :authorize_visitor, only: [:new]
+		load_and_authorize_resource
+		# before_action :authenticate_user!, :excerpt => [:show]
+		# before_action :authorize_visitor, only: [:new]
 		
 
 		def index

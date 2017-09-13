@@ -2,6 +2,7 @@ require_dependency "explorer/application_controller"
 
 module Explorer
 	class MembershipsController < ApplicationController
+		load_and_authorize_resource
 		
 		def create
 			@membership = Explorer::Membership.new(membership_params)

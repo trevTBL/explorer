@@ -2,6 +2,7 @@ require_dependency "explorer/application_controller"
 
 module Explorer
 	class PagesController < ApplicationController
+		load_and_authorize_resource
 		
 		def index
 			@users = User.all

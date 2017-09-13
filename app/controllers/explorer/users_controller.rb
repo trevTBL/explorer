@@ -2,8 +2,9 @@ require_dependency "explorer/application_controller"
 
 module Explorer
 	class UsersController < ApplicationController
-		before_action :authenticate_user!, :only => [:edit, :update, :destroy]
-		before_action :correct_user, :only => [:edit, :update, :destroy]
+		load_and_authorize_resource
+		# before_action :authenticate_user!, :only => [:edit, :update, :destroy]
+		# before_action :correct_user, :only => [:edit, :update, :destroy]
 
 		def index
 			if !current_user.has_role? :admin

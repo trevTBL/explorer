@@ -2,7 +2,8 @@ require_dependency "explorer/application_controller"
 
 module Explorer
 	class OrganizersController < ApplicationController
-		before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
+		load_and_authorize_resource
+		# before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 		# before_action :valid_org, :only => [:edit, :update, :destroy]
 
 		def index

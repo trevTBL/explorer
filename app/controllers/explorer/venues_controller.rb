@@ -2,6 +2,7 @@ require_dependency "explorer/application_controller"
 
 module Explorer
 	class VenuesController < ApplicationController
+		load_and_authorize_resource
 		before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 		
 		def index
