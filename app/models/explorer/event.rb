@@ -6,6 +6,20 @@ module Explorer
 		# mount_uploader :image, EventUploader
 		has_shortened_urls
 
+		scope :active, lambda{ |date = Date.today| 
+    where("start_date >= ? OR ? <= end_date", date, date).where(activated: true)
+  }
+		scope :current, lambda{ |date = Date.today| where("? BETWEEN start_date AND end_date", date) }
+	  scope :upcoming, lambda{ |date = Date.today| where('start_date > ?', date)}
+	  scope :expired, lambda{ |date = Date.today| where('end_date < ?', date)}
+	  scope :today, -> {where('start_date = ?', Date.today)}
+
+	  scope :by_recent, -> { order(created_at: :desc)}
+	  scope :by_start_date, -> { order(start_date: :asc)}
+	  scope :by_end_date, -> { order(end_date: :asc)}
+	  scope :by_start_time, -> { order(start_time: :asc)}
+	  scope :by_end_time, -> { order(end_time: :asc) }
+
 		extend FriendlyId
 	    friendly_id :slug_candidates, :use => [:slugged,:history, :finders]
 
@@ -35,11 +49,9 @@ module Explorer
 			:description, 
 			presence: true
 
-		# validates :venue_id, presence: true, :unless => 'venue.present?'
-
 		validates :venue_id, presence: true
 		# validates :excerpt, length: {maximum: 130}
-		validates :description, length: {minimum: 150}
+		# validates :description, length: {minimum: 150}
 
 		def nil_if_blank
 			NULL_ATTRS.each { |attr| self[attr] = nil if self[attr].blank? }
@@ -71,10 +83,10 @@ module Explorer
 	  validate :end_time_after_start
 
 		def end_date_after_start
-		    return if end_date.blank? || start_date.blank?
-		    if end_date < start_date
-		      self.errors.add(:end_date, "must be after the start date") 
-		    end 
+	    return if end_date.blank? || start_date.blank?
+	    if end_date < start_date
+	      self.errors.add(:end_date, "must be after the start date") 
+	    end 
 		end
 
 		def end_time_after_start

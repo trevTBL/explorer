@@ -25,6 +25,10 @@ class Organizer < ActiveRecord::Base
 	  end
 	end
 
+	validates :name,
+    :description,
+    presence: true
+
 	before_save :smart_add_url_protocol
 
 	def to_s

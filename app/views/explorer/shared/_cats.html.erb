@@ -2,7 +2,7 @@
     <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">
         All <div class="cbp-filter-counter"></div>
     </div>
-    <% @categories = @event_categories%>
+    <% @categories = @event_categories %>
     <% @categories.each do |cat| %>
         <div data-filter=".<%= cat.name %> " class="cbp-filter-item">
             <%= cat.name %> <div class="cbp-filter-counter"></div>

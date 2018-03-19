@@ -2,14 +2,14 @@ require_dependency "explorer/application_controller"
 
 module Explorer
 	class EventsController < ApplicationController
-		# load_and_authorize_resource
-		# skip_authorize_resource :only => :my_events
+		load_and_authorize_resource
+		skip_authorize_resource :only => :my_events
 		# before_action :authenticate_user!, :excerpt => [:show]
 		# before_action :authorize_visitor, only: [:new]
 		
 
 		def index
-			@events = Event.where(activated: true).order(start_date: :ASC)
+			@events = Event.active.by_recent
 			@hash = Gmaps4rails.build_markers(@events) do |event, marker|
 			  location_link = view_context.link_to 'View events at '+ event.venue.name, venue_path(event.venue)
 			  marker.lat event.venue.latitude

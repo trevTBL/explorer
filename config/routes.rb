@@ -1,10 +1,10 @@
 Explorer::Engine.routes.draw do
 
   root to: 'listings#index'
-  resources :events
-  resources :venues
-  resources :listings
-  resources :organizers
+  resources :events, path: :e
+  resources :venues, path: :v
+  resources :listings, path: :l
+  resources :organizers, path: :o
   resources :memberships
   resources :users
   resources :categories

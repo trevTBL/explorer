@@ -18,7 +18,7 @@
 		<% if @organizer.listings.exists? %>
 			<h4>Locations</h4>
 			<% @organizer.listings.each do |listing| %>
-				<p><%= listing.street %><%= listing.unit %> <br/> <%= listing.city %>, <%= listing.state %>, <%= listing.zip %> <br/> <%= listing.phone %></p>
+				<p><%= listing.street %> <% if listing.unit %><br/> <%= listing.unit %><% end %> <br/> <%= listing.city %>, <%= listing.state %>, <%= listing.zip %> <br/> <%= listing.phone %></p>
 			<% end %>
 		<% end %>
 	</p>
