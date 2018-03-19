@@ -2,7 +2,8 @@ require_dependency "explorer/application_controller"
 
 module Explorer
 	class EventsController < ApplicationController
-		load_and_authorize_resource
+		# load_and_authorize_resource
+		# skip_authorize_resource :only => :my_events
 		# before_action :authenticate_user!, :excerpt => [:show]
 		# before_action :authorize_visitor, only: [:new]
 		
@@ -38,11 +39,11 @@ module Explorer
 			@event.user_id = current_user.id
 			@event.activated = true
 			if @event.save
-				redirect_to confirm_path
+				redirect_to event_path(@event)
 			else
 				@venue = @event.build_venue() if @event.venue.blank?
-				render action: "new"
-			end
+			  render action: "new"
+		 end
 		end
 
 		def show

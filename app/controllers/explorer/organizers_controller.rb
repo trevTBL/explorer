@@ -22,7 +22,7 @@ module Explorer
 					user_id: current_user.id, 
 					owner: true
 					)
-				redirect_to :back
+				redirect_to organizer_path(@organizer)
 			else
 				render action: "new"
 			end

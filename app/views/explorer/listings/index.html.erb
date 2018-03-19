@@ -14,7 +14,7 @@
 	    });
 	  </script>
 <% end %>
-<div class="listing-index">
+<div class="row">
 <h1>Black Tech Organizations and Communities</h1>
 
 <div class="table-responsive">
@@ -27,7 +27,7 @@
 				<% else %>
 					<td><%= link_to listing.name, organizer_path(listing.organizer) %></td>
 				<% end %>
-				<td><%= listing.category.name %></td>
+				<td><%= listing.category.name if listing.category %></td>
 				<td><%= listing.city %></td>
 				<td><%= listing.state %></td>
 				<td><%= listing.zip %></td>

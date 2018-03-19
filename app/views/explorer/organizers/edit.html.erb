@@ -8,6 +8,15 @@
 		<%= render :partial=> 'form', :locals=>{f: f} %>
 	<% end %>
 </div>
+<div class="submission-form">
+	<p class="lead">Manage Locations</p>
+	<p><small>A location is needed in order to be listed in our directory.  At minimum, you need to add the zip code you operate in.</small></p>
+ 	<% @organizer.listings.each do |l| %>
+ 		<p><%= link_to "#{l.city}, #{l.state} #{l.zip}" , edit_listing_path(l) %></p>
+ 	<% end %>
+ 	<hr/>
+ 	<p><%= link_to 'Add Location', new_listing_path, class: 'btn btn-primary' %></p>
+</div>
 <!-- <hr/>
 <div class="submission-form">
 	<p class="lead">Add Team Members</p>

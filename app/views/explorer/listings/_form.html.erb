@@ -1,31 +1,52 @@
 <%= render 'shared/error_messages', :object => @listing %>
-	<% if current_user.has_role? :admin %>
-		<%= f.input :organizer_id, 
-      :label=> 'Organizer',
-      collection:  @organizers,
-      selected:  @listing.organizer, 
-      include_blank: '- None -' ,
-      input_html: { class: 'chosen-select form-control' }  
-      %>
-	<% end %>
-	<p>
-		<%= f.input :name, :label=>'Name of Organization/Community/Initiative' %>
-	</p>
-	<p>
-	  <%= f.input :category_id, 
-      :label=> 'Category',
-      collection:  @organizer_categories,
-      selected:  @listing.category, 
-      include_blank: '- None -' ,
-      input_html: { class: 'chosen-select form-control' }  
-      %>
-	</p>
-	<%= f.input :url, :label=>'Website URL'  %>
-	<%= f.input :city %>
-		<%= f.input :state, 
-		:label=> 'State',
-		collection: state_options,
-		include_blank: '- None -' ,
-		input_html: { class: 'chosen-select form-control' }  
-		%>
-	<%= f.input :zip %>
+ <div class="row">
+  <div class="col-md-8">
+    <p>
+      <% if !current_user.organizers.empty? %>
+  		<%= f.input :organizer_id, 
+        :label=> 'Organizer',
+        collection:  @current_user.organizers,
+        selected: @listing.organizer_id ?  @listing.organizer_id : '', 
+        include_blank: '- None -' ,
+        input_html: { class: 'chosen-select form-control' }  
+        %>
+      </p>
+  	<% else %>
+  	<p>
+  		<%= f.input :name, :label=>'Name of Organization/Community/Initiative' %>
+  	</p>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+  	<p>
+  	  <%= f.input :category_id, 
+        :label=> 'Category',
+        collection:  @organizer_categories,
+        selected:  @listing.category_id ?  @listing.category_id : '', 
+        include_blank: '- None -' ,
+        input_html: { class: 'chosen-select form-control' }  
+        %>
+  	</p>
+  </div>
+</div>
+  <%= f.input :url, :label=>'Website URL'  %>
+  <hr/>
+  <%= f.input :phone, :label=>'Contact Number' %>
+  <%= f.input :street, label: 'Street Address' %>
+  <%= f.input :unit, label: 'Unit' %>
+  <div class="row">
+    <div class="col-md-5">
+	   <%= f.input :city %>
+     </div>
+   <div class="col-md-4">
+	   <%= f.input :state, 
+  		:label=> 'State',
+  		collection: state_options,
+  		include_blank: '- None -' ,
+  		input_html: { class: 'chosen-select form-control' }  
+  		%>
+    </div>
+    <div class="col-md-3">
+	   <%= f.input :zip %>
+    </div>
+  </div>

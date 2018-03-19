@@ -8,7 +8,7 @@ class Organizer < ActiveRecord::Base
 	has_many :users, :through => :memberships
 
 	has_many :events
-	has_one :listing
+	has_many :listings
 
 	def smart_add_url_protocol
 	  unless self.url[/\Ahttp:\/\//] || self.url[/\Ahttps:\/\//]
@@ -26,6 +26,10 @@ class Organizer < ActiveRecord::Base
 	end
 
 	before_save :smart_add_url_protocol
+
+	def to_s
+		self.name
+	end
 
 	extend FriendlyId
  	friendly_id :slug_candidates, :use => [:slugged,:history, :finders]

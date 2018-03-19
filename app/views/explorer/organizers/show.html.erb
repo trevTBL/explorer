@@ -1,5 +1,5 @@
 <% provide(:title , @organizer.name ) %>
-
+<div class="row">
 <div class="col-md-4">
 	<%= image_tag @organizer.logo, :class=>"img-responsive"%>
 	<div class="clearfix"></div>
@@ -13,12 +13,26 @@
 	<p class="lead">
 		<%= simple_format(@organizer.description) %>
 	</p>
+	<hr/>
 	<p>
-		<% if @organizer.listing %>
-			<%= @organizer.listing.city %>, <%= @organizer.listing.state %>, <%= @organizer.listing.zip %>
+		<% if @organizer.listings.exists? %>
+			<h4>Locations</h4>
+			<% @organizer.listings.each do |listing| %>
+				<p><%= listing.street %><%= listing.unit %> <br/> <%= listing.city %>, <%= listing.state %>, <%= listing.zip %> <br/> <%= listing.phone %></p>
+			<% end %>
 		<% end %>
 	</p>
 	<hr/>
+	<h4>The Team</h4>
+		<% @organizer.memberships.each do |m| %>
+			<% u = User.find(m.user_id) %>
+			<p class="lead">
+				<%= link_to main_app.user_path(u) do %>
+					<%= image_tag u.avatar.mini, title: u.name %>
+				<% end %>
+			</p>
+		<% end %>
+		<hr/>
 	<ul class="list-inline">
 		<li>
 			<%= link_to(@organizer.url, :target=>"_blank" ) do %>
@@ -37,15 +51,36 @@
 		</li>
 	</ul>
 </div>
-<div class="col-md-6 col-md-offset-1">
-<h3>Events by Organizer</h3>
-	<% @events.each do |e| %>
-		<p class="lead"><%= link_to e.title, e %></p>
-	<% end %>
+<div class="col-md-8">
+<h3>Events posted by <%= "#{@organizer}" %></h3>
+	
+<% @events.each do |e| %>
+	<div class="col-md-12">
+		<div class="card event-card">
+			<% if e.image %>
+			 <%= image_tag e.image, class: "card-img-top" %>
+			<% end %>
+			<div class="card-header">
+		    <h3 class="card-title"><%= e.title %></h3>
+		  </div>
+			<div class="card-body">
+				
+				<p class="card-text"><%= e.excerpt %></p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+			    <%= e.start_date.strftime("%a; %b %d, %Y") %>
+			  </li>
+			  <li class="list-group-item">
+			    	<%= e.start_time.strftime("%-I:%M %p") if e.end_date %>
+			  </li>
+			</ul>
+			<div class="card-footer">
+				<small><%= e.venue.city %>, <%= e.venue.state %></small>
+			</div>
+		</div>
+	</div>
+<% end %>
+
 </div>
-<!-- <h3>The Event Team</h3>
-<%# @organizer.memberships.each do |m| %>
-
-<p class="lead"><%# link_to m.user.name, m.user %><%# ' (owner)' if m.owner? %></p>
-
-<%# end %> -->
+</div>

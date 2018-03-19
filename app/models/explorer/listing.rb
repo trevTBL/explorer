@@ -7,6 +7,8 @@ module Explorer
   	extend FriendlyId
 	 	friendly_id :slug_candidates, :use => [:slugged,:history, :finders]
 
+    validates :organizer_id, presence: true
+
 	  def slug_candidates
 			slugger = rand(1..100)
 			listing = self.name

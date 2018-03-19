@@ -26,15 +26,14 @@ module Explorer
 
     def new
         @listing = Listing.new 
-        get_organizers
-        get_parent
+        get_categories
     end
         
 
     def create
         @listing = Listing.new(listing_params)
         if @listing.save
-            if !@listing.organizer.blank?
+            if @listing.organizer_id
                 @listing.name = @listing.organizer.name
                 @listing.url = @listing.organizer.url
                 @listing.save
@@ -49,16 +48,17 @@ module Explorer
 
     def edit
         @listing = Listing.find(params[:id])
-        authorize! :update, @listing
-        get_organizers
-        get_parent
+  
+        get_categories
     end
 
     def update
         @listing = Listing.find(params[:id])
         if @listing.update_attributes(listing_params)
-            redirect_to @listing
+            flash[:success] = "Listing updated"
+            redirect_to edit_listing_path(@listing)
         else
+            flash[:danger] = "Couldn't save your listing. Please check input."
             render action: "edit"
         end
     end
@@ -72,14 +72,11 @@ module Explorer
 
     private
  
-    def get_parent
+    def get_categories
         parent = Category.where(name: "Organizer").last
         @organizer_categories = Category.where(parent_id: parent.id)
     end
 
-    def get_organizers
-        @organizers = Explorer::Organizer.eager_load(:listing).merge(Explorer::Listing.where(id: nil))
-    end
 
     def listing_params
         params.require(:listing).permit(
@@ -87,6 +84,9 @@ module Explorer
             :description,
             :slug,
             :url,
+            :phone,
+            :street,
+            :unit,
             :city,
             :state,
             :zip,
@@ -94,7 +94,7 @@ module Explorer
             :category_id,
             :latitude,
             :longitude
-            )
+        )
     end
   end
 end
