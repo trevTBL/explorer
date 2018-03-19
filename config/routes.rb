@@ -1,6 +1,6 @@
 Explorer::Engine.routes.draw do
 
-  root to: 'pages#soon'
+  root to: 'listings#index'
   resources :events
   resources :venues
   resources :listings

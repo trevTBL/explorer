@@ -2,8 +2,8 @@
 	 <% if yield(:map) %>
        <%= yield(:map) %>
     <% end %>
-	<div class="wrapper">
-		<div class="container-fluid">
+	<div class="twb-content">
+		<div class="twb-page">
 			<% flash.each do |key, value| %>
 				<div class="alert alert-<%= key %>">
 				  <%= value %>

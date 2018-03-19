@@ -16,6 +16,37 @@ body{
 	height:100%;
 }
 
+.twb-body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.twb-content {
+  flex: 1;
+}
+
+.twb-page{
+  padding: 2rem 2rem;
+
+  @media (min-width: 992px) {
+    padding: 4rem;
+  }
+}
+
+.spacer{
+  height: 48px;
+
+  &.--sm{
+    height: 24px;
+  }
+}
+
+.page{
+  padding: 48px;
+}
+
+
 .wrapper{
 	background: #f2f2f2;
 	min-height:90% !important; /* browser fill */
@@ -240,9 +271,6 @@ line-height:24px;
 }
 
 .map-holder{
-	margin-top: 88px;
+	margin-top: -25px;
 
-	&+.wrapper{
-		padding-top:0px;
-	}
 }

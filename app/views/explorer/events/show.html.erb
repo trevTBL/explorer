@@ -13,9 +13,11 @@
 <% provide(:twitter, twitter_handle)%>
 
 <div class="col-md-8 event-wrapper">
-	<div class="event-image">
-		<img src="<%= event_img %>" alt="<%= @event.title%>" class="img-responsive">
-	</div>
+	<% if !@event.image.blank? %>
+		<div class="event-image">
+			<img src="<%= event_img %>" alt="<%= @event.title%>" class="img-responsive">
+		</div>
+	<% end %>
 	<div class="event-content col-md-12">
 		<div class="event-title">
 			<h2><%= @event.title %></h2>
