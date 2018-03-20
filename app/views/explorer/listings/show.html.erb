@@ -7,63 +7,31 @@
 <% provide(:url, listing_url(@listing) )%>
 <% provide(:twitter, twitter_handle)%>
 
-<div class="col-md-6">
+<div class="col-md-5">
 	<div class="well text-center">
-		
-		<p class="lead"><%= @listing.name %> does not participate in our community.</p>
+		<p class="lead"><%= @listing.name %> has not created a page on Tech While Black yet.</p>
 		<p>
-			<%= link_to 'Find a participating organization to support instead', listings_path, :class=>"btn btn-primary"  %>
+			<%= link_to 'Search for a participating organization instead', listings_path, :class=>"btn btn-primary"  %>
 		</p>
 		<hr/>
-	<div class="well text-center">
-
-		<a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-		 Why support participating organizations?
-		</a>
-
-	<div class="collapse" id="collapseExample">
-		
-			<p>Simply put, the participating organizers in our community believe in collaborating for the betterment of our community above feeding their egos and pockets.</p>
-			<p>Every organization listed on Tech While Black has been contacted, informed about reasons for collaboration, and invited to participate. The ones with a page see the value of collaboration and participation, rather than working alone.</p>
-			<p>There are a lot of black tech organizations in the world. Many of them were formed with sincere intentions of supporting black tech community.  Other simply saw a great marketing or business opportunity.</p>
-			<p>While the latter group of opportunists and validation-seekers cause great harm to the black tech community, they make more noise and take away needed support from the organizations doing the real impact work.</p>
-			<p>Organizations participating in the Tech While Black community have demonstrated a willingness to collaborate with and support other black tech organizations for the greater good of the black tech community as a whole.  These organizers realize that as great as we are alone, we are stronger together.</p>
-			<p>We list all organizations that we learn about in our directory, regardless of participation or affiliation because we believe in choice.  You may not share our beliefs on collaboration and participation, no harm, no foul. We love you anyway and hope you find an organization that helps you succeed.</p>	
-		</div>
+		<p>
+			<%= link_to "Continue to external website for #{@listing.name}", @listing.url, target: '_blank' %>
+		</p>
 	</div>
-
-	<p>
-		<%= link_to "Continue to external website for #{@listing.name}", @listing.url %>
-	</p>
 </div>
-</div>
-<div class="col-md-6">
+<div class="col-md-7">
 	<div class="well text-center">
 		<h2>Is this your organization?</h2>
 		<h3>Claim page and start participating now!</h3>
 		<hr/>
-		<p class="lead">It's free, so why aren't you collaborating yet?</p>
+		<p class="lead">It's free, so what are you waiting for?</p>
+		<hr/>
 		<p>
-			<%= link_to 'Add page now', new_listing_url, :class=>"btn btn-default" %>
+			<%= link_to 'Create Organizer Profile', new_organizer_path, :class=>"btn btn-default" %>
 		</p>
-		<hr/>
-		<h4>Why should you add a page?</h4>
-		<ul>
-			<li>Demonstrate that you are committed to collaboration</li>
-			<li>Update and Manage your listing details</li>
-			<li>Be part of and engage black tech community</li>
-			<li>Engage more potential program participants</li>
-			<li>Attract more program volunteers and supporters</li>
-			<li>Promote your program activities</li>
-			<li>Share your social media links</li>
-		</ul>
-		<hr/>
-		<h4>Why should you not add a page?</h4>
-		<ul>
-			<li>You don't believe in collaboration</li>
-			<li>You don't plan to participate by promoting your activities</li>
-			<li>You don't really want to engage black tech community</li>
-			<li>You aren't interested in program participants, volunteers, or supporters</li>
-		</ul>
+		<p>
+			<%= link_to 'View Claim Instructions', '#', :class=>"btn btn-default" %>
+		</p>
+	
 	</div>
 </div>

@@ -2,19 +2,28 @@
  <div class="row">
   <div class="col-md-8">
     <p>
-      <% if !current_user.organizers.empty? %>
-  		<%= f.input :organizer_id, 
-        :label=> 'Organizer',
-        collection:  @current_user.organizers,
-        selected: @listing.organizer_id ?  @listing.organizer_id : '', 
-        include_blank: '- None -' ,
-        input_html: { class: 'chosen-select form-control' }  
-        %>
+      <% if current_user.has_role?(:admin) %>
+        <%= f.input :organizer_id, 
+          :label=> 'Select Existing Organizer',
+          collection:  @organizers,
+          selected: @listing.organizer_id ?  @listing.organizer_id : '', 
+          include_blank: '- None -' ,
+          input_html: { class: 'chosen-select form-control' }  
+          %>
+      <% elsif !current_user.organizers.empty? %>
+    		<%= f.input :organizer_id, 
+          :label=> 'Organizer',
+          collection:  @organizers,
+          selected: @listing.organizer_id ?  @listing.organizer_id : '', 
+          include_blank: '- None -' ,
+          input_html: { class: 'chosen-select form-control' }  
+          %>
       </p>
-  	<% else %>
-  	<p>
-  		<%= f.input :name, :label=>'Name of Organization/Community/Initiative' %>
-  	</p>
+  	<% end %>
+    <% if current_user.has_role?(:admin) %>
+    	<p>
+    		<%= f.input :name, :label=>'Add External Organizer' %>
+    	</p>
     <% end %>
   </div>
   <div class="col-md-4">

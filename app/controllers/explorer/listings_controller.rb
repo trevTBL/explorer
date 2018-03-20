@@ -8,13 +8,14 @@ module Explorer
     def index
         @listings = Listing.all
         @hash = Gmaps4rails.build_markers(@listings) do |listing, marker|
-            location_link = view_context.link_to listing.name, listing_path(listing)
+            path = listing.organizer_id ? organizer_path(listing.organizer_id) : listing_path(listing)
+            location_link = view_context.link_to listing.name, path
             marker.lat listing.latitude
             marker.lng listing.longitude
 
             marker.infowindow "
             <h4>#{listing.name}</h4>
-            <p>#{listing.city }, #{listing.state }, #{listing.zip }</p>
+            <p>#{listing.city }, #{listing.state}, #{listing.zip }</p>
             <p><u>#{location_link}</u></p>
             " 
         end
@@ -73,8 +74,13 @@ module Explorer
     private
  
     def get_categories
-        parent = Category.where(name: "Organizer").last
-        @organizer_categories = Category.where(parent_id: parent.id)
+        parent = Explorer::Category.where(name: "Organizer").last
+        if current_user.has_role? :admin
+        @organizers = Explorer::Organizer.where.not(id: Explorer::Listing.all.map(&:organizer_id))
+        else
+            @organizers = current_user.organizers
+        end
+        @organizer_categories = Explorer::Category.where(parent_id: parent.id)
     end
 
 

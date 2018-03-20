@@ -7,8 +7,7 @@ module Explorer
   	extend FriendlyId
 	 	friendly_id :slug_candidates, :use => [:slugged,:history, :finders]
 
-    validates :organizer_id,
-    :city,
+    validates :city,
     :state,
     :category_id,
     presence: true
