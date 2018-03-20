@@ -26,7 +26,12 @@ module Explorer
     end
 
     def new
-        @listing = Listing.new 
+        @listing = Listing.new
+        if current_user.has_role? :admin
+            @organizers = Explorer::Organizer.all
+        else
+            @organizers = current_user.organizers
+        end
         get_categories
     end
         
@@ -35,12 +40,9 @@ module Explorer
         @listing = Listing.new(listing_params)
         if @listing.save
             if @listing.organizer_id
-                @listing.name = @listing.organizer.name
-                @listing.url = @listing.organizer.url
-                @listing.save
-                redirect_to organizer_path(@listing.organizer) and return
+              redirect_to organizer_path(@listing.organizer) and return
             else
-                redirect_to @listing and return
+              redirect_to @listing and return
             end
         else
             render 'new'
@@ -49,7 +51,11 @@ module Explorer
 
     def edit
         @listing = Listing.find(params[:id])
-  
+        if current_user.has_role? :admin
+            @organizers = Explorer::Organizer.all
+        else
+            @organizers = current_user.organizers
+        end
         get_categories
     end
 
@@ -75,11 +81,6 @@ module Explorer
  
     def get_categories
         parent = Explorer::Category.where(name: "Organizer").last
-        if current_user.has_role? :admin
-        @organizers = Explorer::Organizer.where.not(id: Explorer::Listing.all.map(&:organizer_id))
-        else
-            @organizers = current_user.organizers
-        end
         @organizer_categories = Explorer::Category.where(parent_id: parent.id)
     end
 

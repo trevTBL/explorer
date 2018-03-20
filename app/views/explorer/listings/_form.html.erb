@@ -22,7 +22,7 @@
   	<% end %>
     <% if current_user.has_role?(:admin) %>
     	<p>
-    		<%= f.input :name, :label=>'Add External Organizer' %>
+    		<%= f.input :name, :label=>'Location Name', hint: 'ex. Main Office' %>
     	</p>
     <% end %>
   </div>

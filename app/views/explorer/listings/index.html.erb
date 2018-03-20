@@ -22,10 +22,13 @@
 
 		<% @listings.each do |listing| %>
 			<tr>
-				<% if listing.organizer_id.blank? %>
+				<% if !listing.organizer_id.blank? && listing.name? && listing.name.downcase != listing.organizer.name.downcase %>
+					
+					<td><%= link_to "#{listing.organizer} - #{listing.name}", listing_path(listing) %></td>
+				<% elsif listing.organizer_id.blank? %>
 					<td><%= link_to listing.name, listing_path(listing) %></td>
 				<% else %>
-					<td><%= link_to listing.name, organizer_path(listing.organizer) %></td>
+					<td><%= link_to listing.organizer.name, organizer_path(listing.organizer) %></td>
 				<% end %>
 				<td><%= listing.category.name if listing.category %></td>
 				<td><%= listing.city %></td>

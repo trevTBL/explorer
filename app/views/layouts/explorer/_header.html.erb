@@ -57,55 +57,77 @@
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav navbar-right">
-             <li class="dropdown">
-            <%= link_to edit_user_path(current_user), :class=> "dropdown-toggle" , :data=> {:toggle=>'dropdown'} do %>
-              <span title='Switch', data-toggle= 'tooltip', data-placement='bottom'>
-                <i class='fa fa-refresh fa-lg'></i>
-            <% end %>
-            <ul class="dropdown-menu">
-              <li>
-                <%= link_to 'Community', main_app.root_path %>
-              </li>
-              <!-- <li>
-                <%= link_to 'Messages', main_app.conversations_path %>
-              </li> -->
-            </ul>
-          </li>
-		      	<li><%= link_to 'Add Event', new_event_path %></li>
-		      	<li><%= link_to 'Find Events', events_path if user_signed_in? %></li>
-		   			<li><%= link_to 'Browse Organizers', listings_path if user_signed_in? && current_user.has_role?(:admin)%></li>
-		      	<!-- <li><%= link_to 'My Tickets', my_tickets_path if user_signed_in? %></li> -->
-		      	<li><%= link_to 'Manage', my_events_path if user_signed_in? %></li>
+          <ul class="nav navbar-nav navbar-left">
             <li class="dropdown">
-            <%= link_to edit_user_path(current_user), :class=> "dropdown-toggle" , :data=> {:toggle=>'dropdown'} do %>
-              <span title='Account', data-toggle= 'tooltip', data-placement='bottom'>
-                <i class='fa fa-user fa-lg'></i>
-                <span> <%= current_user.name %></span>
-              
-                <span class="caret"></span></span>
-            <% end %>
-            <ul class="dropdown-menu">
-              <li>
-                <%= link_to 'Notifications', main_app.notifications_path %>
-              </li>
-              <li>
-                <%= link_to 'Messages', main_app.conversations_path %>
-              </li>
-              <li>
-                <%= link_to 'View Profile', main_app.user_path(current_user) %>
-              </li>
-              <li>
-                <%= link_to 'Edit Profile', main_app.edit_user_path(current_user) %>
-              </li>
-              <li>
-                <%= link_to 'Manage Account', main_app.manage_account_path %>
-              </li>
-              <li>
-                <%= link_to 'Logout', main_app.logout_path %>
-              </li>
-            </ul>
-          </li>
+              <%= link_to edit_user_path(current_user), :class=> "dropdown-toggle" , :data=> {:toggle=>'dropdown'} do %>
+                <span title='Switch', data-toggle= 'tooltip', data-placement='bottom'>
+                  <i class='fa fa-refresh fa-lg'></i>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to 'Community', main_app.root_path %>
+                </li>
+                <!-- <li>
+                  <%= link_to 'Market', market.root_path %>
+                </li> -->
+              </ul>
+            </li>
+          </ul>
+		      <ul class="nav navbar-nav navbar-right">
+             
+		      	<li>
+              <%= link_to new_event_path do %>
+                <i class="fa fa-plus"></i>
+                Add Event
+              <% end %>
+            </li>
+		      	<li>
+              <%= link_to events_path do %>
+                <i class="fa fa-calendar"></i>
+                Events
+              <% end %>
+            </li>
+            <li>
+              <%= link_to listings_path do %>
+                <i class="fa fa-flag"></i>
+                Directory
+              <% end %>
+            </li>
+            <li>
+              <%= link_to my_events_path do %>
+                <i class="fa fa-gear"></i>
+                Manage
+              <% end %>
+            </li>
+		      	<!-- <li><%= link_to 'My Tickets', my_tickets_path if user_signed_in? %></li> -->
+            <li class="dropdown">
+              <%= link_to edit_user_path(current_user), :class=> "dropdown-toggle" , :data=> {:toggle=>'dropdown'} do %>
+                <span title='Account', data-toggle= 'tooltip', data-placement='bottom'>
+                  <i class='fa fa-user fa-lg'></i>
+                  <span> <%= current_user.name %></span>
+                  <span class="caret"></span></span>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to 'Notifications', main_app.notifications_path %>
+                </li>
+                <li>
+                  <%= link_to 'Messages', main_app.conversations_path %>
+                </li>
+                <li>
+                  <%= link_to 'View Profile', main_app.user_path(current_user) %>
+                </li>
+                <li>
+                  <%= link_to 'Edit Profile', main_app.edit_user_path(current_user) %>
+                </li>
+                <li>
+                  <%= link_to 'Manage Account', main_app.manage_account_path %>
+                </li>
+                <li>
+                  <%= link_to 'Logout', main_app.logout_path %>
+                </li>
+              </ul>
+            </li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
