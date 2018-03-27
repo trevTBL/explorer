@@ -28,14 +28,14 @@ $dark-gray: #37474F;
 }
 
 .navbar-default{
-    background-color: $black;
+    background-color: $gold;
     border:0;
-    border-bottom:1px solid $white;
+    border-bottom:1px solid $black;
     padding-bottom:4px;
     margin-bottom:24px;
 
     a, .navbar-brand, .navbar-nav>li>a{
-    	color:$white;
+    	color:$black;
     }
 
     .navbar-toggle{
@@ -53,40 +53,40 @@ $dark-gray: #37474F;
 }
 
 .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
-    color: $white;
+    color: $black;
     background-color: transparent;
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-    color: $white;
-    background-color: $black;
+    color: $black;
+    background-color: $gold;
 }
 
 .nav-social{
-  background:#000;
+  background:$gold;
 
   .fa{
     font-size:1.4rem;
-    color:#fff;
+    color:$black;
   }
 
 }
 
 .dropdown-menu {
-    background-color:$black;
-    color:$white;
+    background-color:$gold;
+    color:$black;
 
     li>a{
-    	color:$white;
+    	color:$black;
     }
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu>li>a {
-    color: $white;
+    color: $black;
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
-    color: $white;
+    color: $black;
     background-color: $med-gray;
 }
 
@@ -94,16 +94,16 @@ $dark-gray: #37474F;
 
 li{
 	background:$med-gray;
-  color:$white;
+  color:$black;
 
 a {
     border-bottom: 0;
     border-radius: 0;
-    color:$white;
+    color:$black;
   }
 
   &.active{
-  	background:$white;
+  	background:$black;
   	
   	a{
   		color:$med-gray;
@@ -130,20 +130,21 @@ a {
 }
 
 .top-bar{
-  background-color:$gold;
+  background-color:#b07f14;
   padding:0 24px;
   margin:0;
-  font-size:1.2rem;
-  color:#000;
-  height:26px;
-  line-height:26px;
+  font-size:1.1rem;
+  line-height: 3.1rem;
+  color:#fff;
+  height:28px;
+  text-transform:uppercase;
 
   p{
     margin:0;
   } 
 
   a{
-    color:#000;
+    color:$white;
   }
 
    a:hover, a:focus, a:active{

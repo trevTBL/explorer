@@ -84,7 +84,7 @@ h1, h2, h3, h4, h4, h5, h6{
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 footer {
-  background-color: $black;
+  background-color: $gold;
   color:#fff;
 	padding:24px 0;
 
@@ -93,10 +93,7 @@ footer {
   }
 }
 
-.masthead a,.navbar-default .navbar-nav>li>a{
-	text-decoration:none;
-	color:#fff;
-}
+
 
 .card{
 	padding:1%;
