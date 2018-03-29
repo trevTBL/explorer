@@ -18,24 +18,20 @@ $dark-gray: #37474F;
 .navbar-brand {
     float: left;
     height: 50px;
-    font-size:3rem;
-    padding:0;
+    padding: 9px;
     font-size: 18px;
     line-height: 20px;
 }
-.navbar>.container-fluid .navbar-brand {
-    margin-left: -18px;
-}
 
 .navbar-default{
-    background-color: $gold;
+    background-color: $black;
     border:0;
     border-bottom:1px solid $black;
     padding-bottom:4px;
     margin-bottom:24px;
 
     a, .navbar-brand, .navbar-nav>li>a{
-    	color:$black;
+    	color: $white;
     }
 
     .navbar-toggle{
@@ -58,8 +54,8 @@ $dark-gray: #37474F;
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-    color: $black;
-    background-color: $gold;
+    color: $white;
+    background-color: $black;
 }
 
 .nav-social{
@@ -130,7 +126,7 @@ a {
 }
 
 .top-bar{
-  background-color:#b07f14;
+  background-color: $gold;
   padding:0 24px;
   margin:0;
   font-size:1.1rem;
